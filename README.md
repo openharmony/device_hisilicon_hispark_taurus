@@ -245,7 +245,7 @@
 
 ## hi3516dv300许可说明<a name="section172811306502"></a>
 
--   hi35xx\\hi3516dv300\\module\_init\\lib和hi35xx\\hi3516dv300\\soc\\lib里面为上海海思的自研库，遵循上海海思的LICENSE，这两个目录下均有LICENSE文件，LICENSE文件结尾可以看到版权信息：
+-   hi35xx\\hi3516dv300\\module\_init\\lib和hi35xx\\hi3516dv300\\soc\\lib里面为上海海思的自研库，遵循End User License Agreement，这两个目录下均有LICENSE文件，LICENSE文件结尾可以看到版权信息：
 
     ```
     Copyright (C) 2020 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
@@ -257,7 +257,7 @@
      / *Copyright (c) 2020 HiSilicon (Shanghai) Technologies CO., LIMITED. Licensed under the Apache License,* ... * / 
     ```
 
--   hi35xx\\hi3516dv300\\uboot\\reg为上海海思的二进制文件，遵循上海海思的LICENSE，该目录下有LICENSE文件，LICENSE文件结尾可以看到：
+-   hi35xx\\hi3516dv300\\uboot\\reg为上海海思的二进制文件，遵循End User License Agreement，该目录下有LICENSE文件，LICENSE文件结尾可以看到：
 
     ```
     Copyright (C) 2020 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
@@ -281,7 +281,7 @@
 
 ## hi3518ev300许可说明<a name="section172983094910"></a>
 
--   hi35xx\\hi3518ev300\\module\_init\\lib和hi35xx\\hi3518ev300\\soc\\lib里面为上海海思的自研库，遵循上海海思的LICENSE，这两个目录下均有LICENSE文件，LICENSE文件结尾可以看到版权信息：
+-   hi35xx\\hi3518ev300\\module\_init\\lib和hi35xx\\hi3518ev300\\soc\\lib里面为上海海思的自研库，遵循End User License Agreement，这两个目录下均有LICENSE文件，LICENSE文件结尾可以看到版权信息：
 
     ```
     Copyright (C) 2020 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
@@ -293,7 +293,7 @@
      / *Copyright (c) 2020 HiSilicon (Shanghai) Technologies CO., LIMITED. Licensed under the Apache License,* ... * / 
     ```
 
--   hi35xx\\hi3518ev300\\uboot\\reg为上海海思的二进制文件，遵循上海海思的LICENSE，该目录下有LICENSE文件，LICENSE文件结尾可以看到：
+-   hi35xx\\hi3518ev300\\uboot\\reg为上海海思的二进制文件，遵循End User License Agreement，该目录下有LICENSE文件，LICENSE文件结尾可以看到：
 
     ```
     Copyright (C) 2020 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
