@@ -43,6 +43,13 @@
 #include "implementation/usb_init.h"
 #endif
 
+#ifdef LOSCFG_DRIVERS_MMC
+#include <asm/io.h>
+#define PWR_CTRL0_REG 0x12090000
+#define GPIO_AT_PMC_ENABLE_BIT 0x80
+#define REG_SLEEP_TIME_MS 0x30
+#endif
+
 #ifdef LOSCFG_DRIVERS_NETDEV
 #include "lwip/tcpip.h"
 #include "lwip/netif.h"
@@ -88,6 +95,19 @@ extern void tcpip_init(tcpip_init_done_fn initfunc, void *arg);
 }
 #endif
 
+#ifdef LOSCFG_DRIVERS_MMC
+void SDIO_setup(void)
+{
+    /* enable GPIO pin multiplexing in PMC module */
+    unsigned int val;
+
+    val = readl(IO_DEVICE_ADDR(PWR_CTRL0_REG));
+    val = val | GPIO_AT_PMC_ENABLE_BIT;
+    writel(val, IO_DEVICE_ADDR(PWR_CTRL0_REG));
+    LOS_Msleep(REG_SLEEP_TIME_MS);
+}
+#endif
+
 extern void SDK_init(void);
 extern void CatLogShell(void);
 
@@ -122,6 +142,8 @@ void SystemInit(void)
 #endif
 
 #ifdef LOSCFG_DRIVERS_MMC
+    dprintf("setting SDIO register ...\n");
+    SDIO_setup();
     dprintf("MMC dev init ...");
     extern int SD_MMC_Host_init(void);
     SD_MMC_Host_init();
