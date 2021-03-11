@@ -1,0 +1,27 @@
+root {
+    platform {
+        dmac_config {
+            template dmac_controller {
+                index = 0;
+                match_attr = "";
+                reg_pbase = 0;
+                reg_size = 0x1000;
+                irq = 60;
+                max_transfer_size = 65535; // 64 * 1024 -1
+                channel_num = 8;
+            }
+
+            controller_0x10060000 :: dmac_controller {
+                index = 0;
+                match_attr = "hisilicon_hi35xx_dmac_0";
+                reg_pbase = 0x10060000;
+            }
+
+            controller_0x10061000 :: dmac_controller {
+                index = 1;
+                match_attr = "hisilicon_hi35xx_dmac_1";
+                reg_pbase = 0x10061000;
+            }
+        }
+    }
+}

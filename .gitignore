@@ -1,3 +1,2 @@
-soc/huawei_proprietary
-hi3516dv300_adapter/huawei_proprietary
-uboot
+sdk_liteos/mpp/include
+sdk_linux/

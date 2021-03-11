@@ -1,0 +1,4 @@
+u-boot-hi3516dv300.bin is obtained by compiling u-boot-2020.01 in hi35xx\third_party\uboot and reg_info_hi3516dv300.bin in hi35xx\hi3516dv300\uboot\reg.
+u-boot-hi3516dv300.bin complies with the overall protocol of u-boot-2020.01. For details, see the README file in hi35xx\third_party\uboot\u-boot-2020.01\Licenses.
+The toolchain used for compiling u-boot-hi3516dv300.bin is the GCC toolchain downloaded from the open-source community. The version is gcc-arm-none-eabi-7-2017-q4-major-linux.tar.bz2. 
+For details, visit https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads.

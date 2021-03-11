@@ -1,0 +1,198 @@
+root {
+    input_config {
+        touchConfig {
+            touch0 {
+                boardConfig {
+                    match_attr = "touch_device1";
+                    inputAttr {
+                        /* 0:touch 1:key 2:keyboard 3:mouse 4:button 5:crown 6:encoder */
+                        inputType = 0;
+                        solutionX = 480;
+                        solutionY = 960;
+                        devName = "main_touch";
+                    }
+
+// Hi3516DV300-Runhe  gt911--5p5 & 4p0
+                    busConfig {
+                        // 0:i2c 1:spi
+                        busType = 0;
+                        busNum = 6;
+                        clkGpio = 86;
+                        dataGpio = 87;
+                        i2cClkIomux = [0x114f0048, 0x403];
+                        i2cDataIomux = [0x114f004c, 0x403];
+                    }
+
+                    pinConfig {
+                        rstGpio = 3;
+                        intGpio = 4;
+                        rstRegCfg = [0x112f0094, 0x400];
+                        intRegCfg = [0x112f0098, 0x400];
+                    }
+
+// Hi3516DV300-Ruishi gt911--7p0
+/*
+                    busConfig {
+                        // 0:i2c 1:spi
+                        busType = 0;
+                        busNum = 6;
+                        clkGpio = 26;
+                        dataGpio = 27;
+                        i2cClkIomux = [0x114f0048, 0x403];
+                        i2cDataIomux = [0x114f004c, 0x403];
+                    }
+
+                    pinConfig {
+                        rstGpio = 13;
+                        intGpio = 12;
+                        rstRegCfg = [0x10ff0030, 0x400];
+                        intRegCfg = [0x10ff002C, 0x400];
+                    }
+*/
+// Hi3516DV300-Demo board:  ft6336--2p35
+/*
+                    busConfig {
+                        // 0:i2c 1:spi
+                        busType = 0;
+                        busNum = 3;
+                        clkGpio = 2;
+                        dataGpio = 1;
+                        i2cClkIomux = [0x112f0090, 0x5f1];
+                        i2cDataIomux = [0x112f008c, 0x5f1];
+                    }
+
+                    pinConfig {
+                        rstGpio = 3;
+                        intGpio = 4;
+                        rstRegCfg = [0x112f0094, 0x5f0];
+                        intRegCfg = [0x112f0098, 0x5f0];
+                    }
+*/
+                    powerConfig {
+                        /* 0:unused 1:ldo 2:gpio 3:pmic */
+                        vccType = 2;
+                        vccNum = 20;    // gpio20
+                        vccValue = 1800;
+                        vciType = 1;
+                        vciNum = 12;    // ldo12
+                        vciValue = 3300;
+                    }
+
+                    featureConfig {
+                        capacitanceTest = 0;
+                        gestureMode = 0;
+                        gloverMOde = 0;
+                        coverMode = 0;
+                        chargerMode = 0;
+                        knuckleMode = 0;
+                    }
+                }
+
+                chipConfig {
+                    template touchChip {
+                        match_attr = "";
+                        chipName = "gt911";
+                        vendorName = "zsj";
+                        chipInfo = "AAAA11222";  // 4-ProjectName, 2-TP IC, 3-TP Module
+                        /* 0:i2c 1:spi*/
+                        busType = 0;
+                        deviceAddr = 0x5D;
+                        /* 0:None 1:Rising 2:Failing 4:High-level 8:Low-level */
+                        irqFlag = 2;
+                        maxSpeed = 400;
+                        chipVersion = 0; //parse Coord TypeA
+                        powerSequence {
+                            /* [type, status, dir , delay]
+                                <type> 0:none 1:vcc-1.8v 2:vci-3.3v 3:reset 4:int
+                                <status> 0:off or low  1:on or high  2:no ops
+                                <dir> 0:input  1:output  2:no ops
+                                <delay> meanings delay xms, 20: delay 20ms
+                             */
+                            powerOnSeq = [4, 0, 1, 0,
+                                         3, 0, 1, 10,
+                                         3, 1, 2, 60,
+                                         4, 2, 0, 0];
+                            suspendSeq = [3, 0, 2, 10];
+                            resumeSeq = [3, 1, 2, 10];
+                            powerOffSeq = [3, 0, 2, 10,
+                                           1, 0, 2, 20];
+                        }
+                    }
+
+                    chip0 :: touchChip {
+                        match_attr = "zsj_gt911_5p5";
+                        chipInfo = "ZIDN45100";  // 4-ProjectName, 2-TP IC, 3-TP Module
+                        chipVersion = 0; //parse point by TypeA
+                    }
+
+                    chip1 :: touchChip {
+                        match_attr = "zsj_gt911_4p0";
+                        chipInfo = "ZIDN45101";
+                        chipVersion = 1; //parse point by TypeB
+                    }
+
+                    chip2 :: touchChip {
+                        match_attr = "tg_gt911_7p0";
+                        vendorName = "tg";
+                        chipInfo = "ZIDN45102";
+                        chipVersion = 2; //parse point by TypeC
+                    }
+
+                    chip3 :: touchChip {
+                        match_attr = "st_ft6336_2p35";
+                        chipName = "ft6336";
+                        vendorName = "st";
+                        chipInfo = "ZIDN53200";
+                        deviceAddr = 0x38;
+                        irqFlag = 1; // Rising
+                        powerSequence {
+                            /* [type, status, dir , delay]
+                                <type> 0:none 1:vcc-1.8v 2:vci-3.3v 3:reset 4:int
+                                <status> 0:off or low  1:on or high  2:no ops
+                                <dir> 0:input  1:output  2:no ops
+                                <delay> meanings delay xms, 20: delay 20ms
+                             */
+                            powerOnSeq = [4, 2, 0, 0,
+                                         3, 1, 1, 2,
+                                         3, 0, 2, 5,
+                                         3, 1, 2, 200];
+                            suspendSeq = [3, 0, 2, 10];
+                            resumeSeq = [3, 1, 2, 10];
+                            powerOffSeq = [3, 0, 2, 10,
+                                           1, 0, 2, 20];
+                        }
+                    }
+                }
+            }
+        }
+
+        keyConfig {
+            keyList = ["power", "VolUp", "VolDown", "Up", "Down", "Left", "Right"];
+            keyInfoList {
+                key1 {
+                    match_attr = "key_device0";
+                    /* 0:touch 1:key 2:keyboard 3:mouse 4:button 5:crown 6:encoder */
+                    inputType = 1;
+                    keyName = "power";
+                    gpioNum = 1;
+                    irqFlag = 3;
+                    debounceTime = 80;
+                }
+
+                key2 {
+                    keyName = "volUp";
+                    gpioNum = 31;
+                    irqFlag = 1;
+                    debounceTime = 80;
+                }
+
+                key3 {
+                    keyName = "volDown";
+                    gpioNum = 32;
+                    irqFlag = 1;
+                    debounceTime = 80;
+                }
+            }
+        }
+    }
+}
