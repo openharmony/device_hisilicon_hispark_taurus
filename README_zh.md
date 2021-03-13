@@ -91,17 +91,17 @@ third\_party\\uboot\\u-boot-2020.01为uboot开源代码，遵循软件版本自�
 
 ## 相关仓<a name="section1371113476307"></a>
 
-hmf/device/hisilicon/build
+device/hisilicon/build
 
-hmf/device/hisilicon/drivers
+device/hisilicon/drivers
 
-hmf/device/hisilicon/hardware
+device/hisilicon/hardware
 
-**hmf/device/hisilicon/hispark\_taurus**
+**device/hisilicon/hispark\_taurus**
 
-hmf/device/hisilicon/modules
+device/hisilicon/modules
 
-hmf/device/hisilicon/third\_party/ffmpeg
+device/hisilicon/third\_party/ffmpeg
 
-hmf/device/hisilicon/third\_party/uboot
+device/hisilicon/third\_party/uboot
 
