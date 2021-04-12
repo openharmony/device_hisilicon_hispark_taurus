@@ -16,7 +16,6 @@
 #ifndef    __ASM_PLATFORM_H__
 #define    __ASM_PLATFORM_H__
 
-#include "menuconfig.h"
 #include "los_bitmap.h"
 #include "asm/hal_platform_ints.h"
 #include "hisoc/timer.h"
