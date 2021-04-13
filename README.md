@@ -43,10 +43,10 @@ Currently, the Hi3516D V300 chip is supported.
 
 1.  Download the GCC toolchain from  [https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads). Currently, the toolchain version for compiling U-Boot is  **gcc-arm-none-eabi-7-2017-q4-major-linux.tar.bz2**. You can also select other GCC versions.
 2.  Copy the GCC toolchain to the  **prebuilts**  directory and decompress it.
-3.  Go to the  **hispark\_taurus\\uboot\\out\\boot**  directory and modify the path of the toolchain defined by  **OSDRV\_CROSS**  in the  **makefile**  of the directory.
+3.  Go to the  **hispark\_taurus\\sdk\_liteos\\uboot\\out\\boot**  directory and modify the path of the toolchain defined by  **OSDRV\_CROSS**  in the  **makefile**  of the directory.
 4.  Run the  **make clean;make all;**  command to compile the U-Boot.
 
-The generated U-Boot is stored in the  **hispark\_taurus\\uboot\\out\\boot**  directory.
+The generated U-Boot is stored in the  **hispark\_taurus\\sdk\_liteos\\uboot\\out\\boot**  directory.
 
 ## hispark\_taurus License Agreement <a name="section1312121216216"></a>
 

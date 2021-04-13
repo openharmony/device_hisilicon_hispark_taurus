@@ -16,7 +16,7 @@
 **图 1**  多媒体子系统架构图<a name="fig4460722185514"></a>  
 
 
-![](figures/zh-cn_image_0000001084185956.png)
+![](figures/zh-cn_image_0000001086637618.png)
 
 ## 目录<a name="section161941989596"></a>
 
@@ -43,10 +43,10 @@
 
 1.  从开源社区\(https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads\)下载GCC工具链，当前用于编译uboot的工具链版本为gcc-arm-none-eabi-7-2017-q4-major-linux.tar.bz2，也可以选择其他的GCC版本。
 2.  将GCC工具链拷贝到prebuilts目录，并解压。
-3.  进入hispark\_taurus\\uboot\\out\\boot目录，修改该目录下的Makefile中的OSDRV\_CROSS所定义的工具链的路径。
+3.  进入hispark\_taurus\\sdk\_liteos\\uboot\\out\\boot目录，修改该目录下的Makefile中的OSDRV\_CROSS所定义的工具链的路径。
 4.  编译uboot，命令：make clean;make all;
 
-生成的uboot存放在hispark\_taurus\\uboot\\out\\boot目录下。
+生成的uboot存放在hispark\_taurus\\sdk\_liteos\\uboot\\out\\boot目录下。
 
 ## hispark\_taurus协议说明<a name="section1312121216216"></a>
 
