@@ -181,7 +181,7 @@ void SystemInit_MMCInit(void)
     dprintf("MMC dev init ...");
     extern int SD_MMC_Host_init(void);
     SD_MMC_Host_init();
-    LOS_Msleep(400);
+    LOS_Msleep(450);
 #endif
 }
 
