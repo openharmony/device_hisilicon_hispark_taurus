@@ -1,4 +1,15 @@
-# Copyright (C) 2020 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
+# Copyright (C) 2021 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
 
-group("hispark_taurus") {
+if (!defined(ohos_lite)) {
+  import("//build/ohos.gni")
+}
+
+if (defined(ohos_lite)) {
+  group("hispark_taurus") {
+  }
+} else {
+  print("hispark_taurus in")
+  group("hispark_taurus") {
+    deps = [ "sdk_linux:hispark_taurus_sdk" ]
+  }
 }
