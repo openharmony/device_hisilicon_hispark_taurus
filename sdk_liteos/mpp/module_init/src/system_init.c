@@ -48,6 +48,10 @@
 #include "devmgr_service_start.h"
 #endif
 
+#ifdef LOSCFG_DRIVERS_QUICKSTART
+#include "los_dev_quickstart.h"
+#endif
+
 #ifdef LOSCFG_DRIVERS_USB
 #include "implementation/usb_init.h"
 #endif
@@ -127,9 +131,13 @@ void SDIO_setup(void)
 extern void SDK_init(void);
 extern void CatLogShell(void);
 
-void SystemInit(void)
+void SystemInit_ReBootHook(void)
 {
     InitRebootHook();
+}
+
+void SystemInit_IPCM(void)
+{
 #ifdef LOSCFG_PLATFORM_HISI_AMP
     extern int _ipcm_vdd_init(void);
     dprintf("ipcm init ...\n");
@@ -145,32 +153,48 @@ void SystemInit(void)
     dprintf("virt tty init ...\n");
     virt_tty_dev_init();
 #endif
+}
 
+void SystemInit_RandomInit(void)
+{
 #ifdef LOSCFG_DRIVERS_RANDOM
     dprintf("dev urandom init ...\n");
     PlatformRandomOperationsInit();
     DevUrandomRegister();
 #endif
+}
 
+void SystemInit_ProcInit(void)
+{
 #ifdef LOSCFG_FS_PROC
     dprintf("proc fs init ...\n");
     extern void ProcFsInit(void);
     ProcFsInit();
 #endif
+}
 
+void SystemInit_MMCInit(void)
+{
 #ifdef LOSCFG_DRIVERS_MMC
     dprintf("setting SDIO register ...\n");
     SDIO_setup();
     dprintf("MMC dev init ...");
     extern int SD_MMC_Host_init(void);
     SD_MMC_Host_init();
+    LOS_Msleep(450);
 #endif
+}
 
+void SystemInit_MemDevInit(void)
+{
 #ifdef LOSCFG_DRIVERS_MEM
     dprintf("dev mem init ...\n");
     DevMemRegister();
 #endif
+}
 
+void SystemInit_GpioDevInit(void)
+{
 #ifndef LOSCFG_DRIVERS_HDF
 #ifdef LOSCFG_DRIVERS_GPIO
     dprintf("gpio init ...\n");
@@ -178,7 +202,10 @@ void SystemInit(void)
     gpio_dev_init();
 #endif
 #endif
+}
 
+void SystemInit_MacInit(void)
+{
 #ifdef LOSCFG_DRIVERS_HIEDMAC
     extern int hiedmac_init(void);
     hiedmac_init();
@@ -186,7 +213,10 @@ void SystemInit(void)
 #ifdef LOSCFG_DRIVERS_HIDMAC
     dprintf("dmac init ...\n");
 #endif
+}
 
+void SystemInit_FlashInit(void)
+{
 #ifdef LOSCFG_DRIVERS_MTD_NAND
     dprintf("nand init ...\n");
     extern int nand_init(void);
@@ -209,40 +239,65 @@ void SystemInit(void)
         dprintf("spinor_init ...\n");
     }
 #endif
+}
 
+void SystemInit_NetInit(void)
+{
 #ifdef LOSCFG_DRIVERS_NETDEV
     dprintf("net init ...\n");
     net_init();
     dprintf("\n************************************************************\n");
 
 #endif
+}
 
-    dprintf("Date:%s.\n", __DATE__);
-    dprintf("Time:%s.\n", __TIME__);
-
+void SystemInit_SDKInit(void)
+{
 #ifndef LOSCFG_DRIVERS_HDF_PLATFORM_HISI_SDK
     dprintf("calling SDK_init form HISI_SDK\n");
     SDK_init();
     dprintf("calling SDK_init form HISI_SDK done!\n");
 #endif
+}
 
+void SystemInit_MountRootfs(void)
+{
 #ifdef LOSCFG_PLATFORM_ROOTFS
     dprintf("OsMountRootfs start ...\n");
     OsMountRootfs();
     dprintf("OsMountRootfs end ...\n");
 #endif
+}
 
+void SystemInit_HDFInit(void)
+{
 #ifdef LOSCFG_DRIVERS_HDF
+    DeviceManagerSetQuickLoad(1);
     if (DeviceManagerStart()) {
         PRINT_WARN("No drivers need load by hdf manager!");
     }
 #endif
+}
 
+void SystemInit_HDFInit2(void)
+{
+#ifdef LOSCFG_DRIVERS_HDF
+    if (DeviceManagerStartStep2()) {
+        PRINT_WARN("No drivers need load by hdf manager!");
+    }
+#endif
+}
+
+void SystemInit_UsbInit(void)
+{
 #ifdef LOSCFG_DRIVERS_USB
     dprintf("usb init ...\n");
     usb_init(HOST, 0);
 #endif
+}
 
+void SystemInit_ConsoleInit(void)
+{
 #ifdef LOSCFG_DRIVERS_HDF_PLATFORM_UART
     if (virtual_serial_init(TTY_DEVICE) != 0) {
         PRINT_ERR("virtual_serial_init failed");
@@ -251,15 +306,78 @@ void SystemInit(void)
         PRINT_ERR("system_console_init failed\n");
     }
 #endif
-    dprintf("sdk init end\n");
+}
+
+void SystemInit_CatLogShell(void)
+{
 #ifdef LOSCFG_SHELL
     CatLogShell();
 #endif
+}
 
+void SystemInit_UserInitProcess(void)
+{
     if (OsUserInitProcess()) {
         PRINT_ERR("Create user init process faialed!\n");
         return;
     }
-    dprintf("cat log shell end\n");
     return;
+}
+
+void SystemInit1(void)
+{
+    SystemInit_ReBootHook();
+    SystemInit_MacInit();
+    SystemInit_FlashInit();
+    SystemInit_HDFInit2();
+    SystemInit_UsbInit();
+    SystemInit_NetInit();
+    SystemInit_CatLogShell();
+}
+
+/* reserved */
+void SystemInit2(void)
+{
+    return;
+}
+
+/* reserved */
+void SystemInit3(void)
+{
+    return;
+}
+
+void SystemInit_QuickstartInit(void)
+{
+#ifdef LOSCFG_DRIVERS_QUICKSTART
+    QuickstartDevRegister();
+    LosSysteminitHook hook;
+    hook.func[0] = SystemInit1;
+    hook.func[1] = SystemInit2;
+    hook.func[2] = SystemInit3;
+    QuickstartHookRegister(hook);
+    PRINTK("quickstart dev init OK!!!\n");
+#endif
+}
+
+void SystemInit(void)
+{
+    SystemInit_QuickstartInit();
+
+    SystemInit_IPCM();
+    SystemInit_RandomInit();
+    SystemInit_ProcInit();
+    SystemInit_MMCInit();
+    SystemInit_MemDevInit();
+    SystemInit_GpioDevInit();
+    SystemInit_SDKInit();
+    SystemInit_MountRootfs();
+    SystemInit_HDFInit();
+    SystemInit_ConsoleInit();
+#ifndef LOSCFG_DRIVERS_QUICKSTART
+    SystemInit1();
+    SystemInit2();
+    SystemInit3();
+#endif
+    SystemInit_UserInitProcess();
 }
