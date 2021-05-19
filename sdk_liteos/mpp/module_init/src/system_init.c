@@ -331,7 +331,6 @@ void SystemInit1(void)
     SystemInit_FlashInit();
     SystemInit_HDFInit2();
     SystemInit_UsbInit();
-    SystemInit_NetInit();
     SystemInit_CatLogShell();
 }
 
@@ -370,6 +369,7 @@ void SystemInit(void)
     SystemInit_MMCInit();
     SystemInit_MemDevInit();
     SystemInit_GpioDevInit();
+    SystemInit_NetInit();  /* need to check later */
     SystemInit_SDKInit();
     SystemInit_MountRootfs();
     SystemInit_HDFInit();
