@@ -164,15 +164,6 @@ void SystemInit_RandomInit(void)
 #endif
 }
 
-void SystemInit_ProcInit(void)
-{
-#ifdef LOSCFG_FS_PROC
-    dprintf("proc fs init ...\n");
-    extern void ProcFsInit(void);
-    ProcFsInit();
-#endif
-}
-
 void SystemInit_MMCInit(void)
 {
 #ifdef LOSCFG_DRIVERS_MMC
@@ -247,7 +238,6 @@ void SystemInit_NetInit(void)
     dprintf("net init ...\n");
     net_init();
     dprintf("\n************************************************************\n");
-
 #endif
 }
 
@@ -365,7 +355,6 @@ void SystemInit(void)
 
     SystemInit_IPCM();
     SystemInit_RandomInit();
-    SystemInit_ProcInit();
     SystemInit_MMCInit();
     SystemInit_MemDevInit();
     SystemInit_GpioDevInit();
