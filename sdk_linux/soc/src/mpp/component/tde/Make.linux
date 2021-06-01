@@ -1,0 +1,43 @@
+# Copyright (C) 2021 HiSilicon (Shanghai) Technologies CO., LIMITED.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+TDE_DIR = $(PWD)
+
+export HI_MAKE_DEBUG :=
+export MAIN_VERSION := "v2.0.0.0"
+export ADP_VERSION := $(CHIP_ARCH)"adp v2.0.0.0"
+export CHIP_VERSION := _TDE_V400
+
+ifeq ($(CFG_KERNEL_AARCH64_LINUX_GNU), y)
+export SIXTYFOUR_SYS_STATUS = y
+else
+export SIXTYFOUR_SYS_STATUS = n
+endif
+
+.PHONY:clean all driver driverclean
+
+all: driver
+
+driver:
+	@cd driver; make
+	@cp $(TDE_DIR)/driver/$(ARCH_LIBNAME)_tde.ko $(REL_KO)/ -f
+
+clean:driverclean
+	@rm -rf $(PWD)/lib
+
+driverclean:
+	@cd driver; make clean
+	@rm $(REL_KO)/$(ARCH_LIBNAME)_tde.ko -f

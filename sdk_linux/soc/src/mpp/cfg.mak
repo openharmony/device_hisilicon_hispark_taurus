@@ -1,0 +1,419 @@
+# Copyright (C) 2021 HiSilicon (Shanghai) Technologies CO., LIMITED.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+#
+# Automatically generated file; DO NOT EDIT.
+# BVT SDK Platform Configuration
+#
+
+#
+# General Setup
+#
+# CONFIG_HI3559AV100ES is not set
+# CONFIG_HI3559AV100 is not set
+# CONFIG_HI3519AV100 is not set
+export CONFIG_HI3516CV500=y
+# CONFIG_HI3516EV200 is not set
+export CONFIG_HI_CHIP_TYPE=0x3516C500
+export CONFIG_HI_ARCH=hi3516cv500
+export CONFIG_HI_SUBARCH=hi3516cv500
+export CONFIG_HI_SUBCHIP_TYPE=0x3516C500
+export CONFIG_SUBCHIP_HI3516CV500=y
+# CONFIG_SUBCHIP_HI3559V200 is not set
+# CONFIG_SUBCHIP_HI3562V100 is not set
+export CONFIG_SMP=y
+# CONFIG_AMP is not set
+export CONFIG_ARM_ARCH_TYPE=smp
+export CONFIG_A7=y
+export CONFIG_CPU_TYPE=a7
+# CONFIG_VERSION_FPGA is not set
+export CONFIG_VERSION_ASIC=y
+export CONFIG_HI_FPGA=n
+export CONFIG_LINUX_OS=y
+# CONFIG_HUAWEI_LITEOS_OS is not set
+export CONFIG_OS_TYPE=linux
+# CONFIG_KERNEL_SPACE is not set
+export CONFIG_USER_SPACE=y
+export CONFIG_DRIVER_SPACE_TYPE=user_space
+export CONFIG_LINUX_4_19_y=y
+export CONFIG_KERNEL_VERSION=linux-4.19.y
+# CONFIG_KERNEL_ARM_HIMIX100_LINUX is not set
+# CONFIG_KERNEL_ARM_HIMIX310_LINUX is not set
+# CONFIG_KERNEL_ARM_HIMIX200_LINUX is not set
+# CONFIG_KERNEL_ARM_HIMIX400_LINUX is not set
+export CONFIG_KERNEL_ARM_HIMIX410_LINUX=y
+# CONFIG_KERNEL_AARCH32_POKY is not set
+export CONFIG_HI_CROSS=arm-linux-gnueabi-
+export CONFIG_LIBC_TYPE=glibc
+export CONFIG_KERNEL_BIT=KERNEL_BIT_32
+# CONFIG_USER_ARM_HIMIX100_LINUX is not set
+# CONFIG_USER_ARM_HIMIX310_LINUX is not set
+# CONFIG_USER_ARM_HIMIX200_LINUX is not set
+# CONFIG_USER_ARM_HIMIX400_LINUX is not set
+export CONFIG_USER_ARM_HIMIX410_LINUX=y
+# CONFIG_USER_AARCH32_POKY is not set
+export CONFIG_USER_LLVM=y
+export CONFIG_HI_CROSS_LIB=arm-linux-gnueabi-
+export CONFIG_USER_BIT=USER_BIT_32
+export CONFIG_RELEASE_TYPE_RELEASE=y
+# CONFIG_RELEASE_TYPE_DEBUG is not set
+export CONFIG_HI_RLS_MODE=HI_RELEASE
+export CONFIG_CUSTOMER_VERSION_COMMON=y
+# CONFIG_CUSTOMER_VERSION_CUSTOMIZED is not set
+export CONFIG_CUSTOMER_VERSION=COMMON
+export CONFIG_VERSION_NUMBER="1.0.0.1.10"
+
+#
+# Media Modules Setup
+#
+
+#
+# media base config
+#
+# CONFIG_HI_VB_EXTPOOL_SUPPORT is not set
+
+#
+# media sys config
+#
+export CONFIG_HI_SYS_SUPPORT=y
+export CONFIG_HI_SYS_SCALE_COEF_SUPPORT=y
+# CONFIG_HI_SYS_SCALE_COEF_ONLINE_SUPPORT is not set
+
+#
+# media vi config
+#
+export CONFIG_HI_VI_SUPPORT=y
+export CONFIG_HI_VI_BT656=y
+export CONFIG_HI_VI_MIPI=y
+# CONFIG_HI_ISP_2DOF_DIS_SUPPORT is not set
+export CONFIG_HI_VI_LDCV1_SUPPORT=y
+export CONFIG_HI_VI_LDCV2_SUPPORT=y
+# CONFIG_HI_VI_LDCV3_SUPPORT is not set
+export CONFIG_HI_VI_SENDYUV_SUPPORT=y
+# CONFIG_HI_VI_SRC_SUPPORT is not set
+# CONFIG_HI_VI_STITCH_SUPPORT is not set
+# CONFIG_HI_VI_MCF_SUPPORT is not set
+# CONFIG_HI_VI_CHN_EARLY_INT_SUPPORT is not set
+# CONFIG_HI_VI_PARALLEL_SUPPORT is not set
+export CONFIG_HI_VI_3DNRX_SUPPORT=y
+export CONFIG_HI_VI_USERPIC_SUPPORT=y
+export CONFIG_HI_VI_COVEREX_OVERLAYEX_SUPPORT=y
+export CONFIG_HI_VI_LUMA_SUPPORT=y
+export CONFIG_HI_VI_FPN_SUPPORT=y
+export CONFIG_HI_VI_EXTCHN_SUPPORT=y
+# CONFIG_HI_VI_CASCADE_SUPPORT is not set
+export CONFIG_HI_SNAP_SUPPORT=y
+# CONFIG_HI_PIPE_RECEIVER is not set
+# CONFIG_HI_BNR_SUPPORT is not set
+
+#
+# media isp config
+#
+export CONFIG_HI_ISP_SUPPORT=y
+export CONFIG_HI_ISP_AF_SUPPORT=y
+export CONFIG_HI_ISP_CR_SUPPORT=y
+export CONFIG_HI_ISP_PREGAMMA_SUPPORT=y
+export CONFIG_HI_ISP_GCAC_SUPPORT=y
+export CONFIG_HI_ISP_CA_SUPPORT=y
+export CONFIG_HI_ISP_EDGEMARK_SUPPORT=y
+export CONFIG_HI_ISP_HLC_SUPPORT=y
+export CONFIG_HI_ISP_SPECAWB_SUPPORT=y
+# CONFIG_HI_ISP_PQ_FOR_AI_SUPPORT is not set
+export CONFIG_HI_ISP_DPC_STATIC_TABLE_SUPPORT=y
+# CONFIG_HI_ISP_RLSC_ONLINE_CALIB_SUPPORT is not set
+
+#
+# media dis config
+#
+export CONFIG_HI_DIS_SUPPORT=y
+
+#
+# media vpss config
+#
+export CONFIG_HI_VPSS_SUPPORT=y
+export CONFIG_HI_VPSS_3DNR_SUPPORT=y
+# CONFIG_HI_VPSS_AUTO_SUPPORT is not set
+# CONFIG_HI_VPSS_BACKUP_SUPPORT is not set
+export CONFIG_HI_VPSS_LUMA_STAT_SUPPORT=y
+# CONFIG_HI_VPSS_VGS_LDC_SUPPORT is not set
+# CONFIG_HI_VPSS_VGS_ROTATION_SUPPORT is not set
+export CONFIG_HI_VPSS_COVER_SUPPORT=y
+export CONFIG_HI_VPSS_MOSAIC_SUPPORT=y
+# CONFIG_HI_VPSS_3DNRT_SUPPORT is not set
+# CONFIG_HI_VPSS_DELAY_SUPPORT is not set
+export CONFIG_HI_VPSS_BUF_SHARE_SUPPORT=y
+export CONFIG_HI_VPSS_SPREAD_SUPPORT=y
+
+#
+# media avs config
+#
+
+#
+# media gdc config
+#
+export CONFIG_HI_GDC_SUPPORT=y
+export CONFIG_HI_GDC_LOWDELAY_SUPPORT=y
+# CONFIG_HI_GDC_FISHEYE_LMF_SUPPORT is not set
+export CONFIG_HI_GDC_FISHEYE_SUPPORT=y
+export CONFIG_HI_GDC_NNIE_SHARE_RAM=y
+
+#
+# media vgs config
+#
+export CONFIG_HI_VGS_SUPPORT=y
+# CONFIG_HI_VGS_STITCH_SUPPORT is not set
+# CONFIG_HI_VGS_IVE_PRE_SUPPORT is not set
+export CONFIG_HI_VGS_LUMA_STAT_SUPPORT=y
+
+#
+# media chnl config
+#
+export CONFIG_HI_CHNL_SUPPORT=y
+
+#
+# media venc config
+#
+export CONFIG_HI_VENC_SUPPORT=y
+export CONFIG_HI_H265E_SUPPORT=y
+# CONFIG_HI_H265E_QUANTIZATION_SUPPORT is not set
+export CONFIG_HI_H265E_USERDATA_SUPPORT=y
+export CONFIG_HI_H265E_INTRA_REFRESH_SUPPORT=y
+export CONFIG_HI_H264E_SUPPORT=y
+export CONFIG_HI_H264E_SVC_SUPPORT=y
+# CONFIG_HI_H264E_QUANTIZATION_SUPPORT is not set
+export CONFIG_HI_H264E_USERDATA_SUPPORT=y
+export CONFIG_HI_H264E_INTRA_REFRESH_SUPPORT=y
+export CONFIG_HI_JPEGE_SUPPORT=y
+export CONFIG_HI_MJPEGE_SUPPORT=y
+export CONFIG_HI_JPEGE_DCF_SUPPORT=y
+export CONFIG_HI_JPEGE_USERDATA_SUPPORT=y
+export CONFIG_HI_VENC_LOWDELAY_SUPPORT=y
+export CONFIG_HI_VENC_VPSSAUTO_SUPPORT=y
+# CONFIG_HI_VENC_OVERLAYEX_SUPPORT is not set
+export CONFIG_HI_VENC_FRAMEBUF_RECYCLE_SUPPORT=y
+export CONFIG_HI_VENC_MPF_VGS_SUPPORT=y
+export CONFIG_HI_VENC_VGS_SUPPORT=y
+export CONFIG_HI_VENC_SVC_SUPPORT=y
+export CONFIG_HI_VENC_SVC_USER_SEND_REGION=y
+# CONFIG_HI_VENC_ADVSMARTP_SUPPORT is not set
+export CONFIG_HI_VENC_SMARTP_SUPPORT=y
+# CONFIG_HI_VENC_BIPREDB_SUPPORT is not set
+export CONFIG_HI_VENC_DUALP_SUPPORT=y
+export CONFIG_HI_VENC_RCNREF_SHARE_SUPPORT=y
+export CONFIG_HI_VENC_DEBREATH_SUPPORT=y
+export CONFIG_HI_VENC_SKIPREF_SUPPORT=y
+export CONFIG_HI_VENC_SCENE0_SUPPORT=y
+export CONFIG_HI_VENC_SCENE1_SUPPORT=y
+export CONFIG_HI_VENC_SCENE2_SUPPORT=y
+export CONFIG_HI_RC_AVBR_SUPPORT=y
+export CONFIG_HI_RC_QPMAP_SUPPORT=y
+export CONFIG_HI_RC_QVBR_SUPPORT=y
+export CONFIG_HI_RC_CVBR_SUPPORT=y
+# CONFIG_HI_OMX_SUPPORT is not set
+# CONFIG_HI_HIGH_PER_SUPPORT is not set
+# CONFIG_HI_NEON_CODE_SUPPORT is not set
+
+#
+# media vdec config
+#
+export CONFIG_HI_VDEC_SUPPORT=y
+export CONFIG_HI_H265D_SUPPORT=y
+export CONFIG_HI_H264D_SUPPORT=y
+export CONFIG_VDEC_IP=VDEC_IP_VEDU
+export CONFIG_HI_JPEGD_SUPPORT=y
+# CONFIG_HI_JPEGD_RGB_OUTPUT_SUPPORT is not set
+export CONFIG_HI_JPEGD_PROGRESSIVE=y
+# CONFIG_HI_JPEGD_SOFT_BASELINE is not set
+# CONFIG_VDEC_ROTATION_SUPPORT is not set
+# CONFIG_VDEC_USERPIC_SUPPORT is not set
+export CONFIG_VDEC_USERDATA_SUPPORT=y
+
+#
+# media vo config
+#
+export CONFIG_HI_VO_SUPPORT=y
+# CONFIG_HI_VO_PLAY_CTL is not set
+# CONFIG_HI_VO_LUMA is not set
+export CONFIG_HI_VO_FB_SEPARATE=y
+export CONFIG_HI_VO_COVER_OSD_SUPPORT=y
+export CONFIG_HI_VO_VGS=y
+export CONFIG_HI_VO_GRAPH=y
+# CONFIG_HI_VO_BATCH is not set
+
+#
+# media region config
+#
+export CONFIG_HI_REGION_SUPPORT=y
+# CONFIG_HI_RGN_DIFFPIXOSD_SUPPORT is not set
+export CONFIG_HI_RGN_VGS_QUICKCOPY_SUPPORT=y
+
+#
+# media audio config
+#
+export CONFIG_HI_AUDIO_SUPPORT=y
+export CONFIG_HI_ACODEC_SUPPORT=y
+export CONFIG_HI_ACODEC_VERSION=V660
+export CONFIG_HI_ACODEC_MAX_GAIN=50
+export CONFIG_HI_ACODEC_MIN_GAIN=0
+export CONFIG_HI_ACODEC_GAIN_STEP=2
+export CONFIG_HI_ACODEC_FAST_POWER_SUPPORT=y
+export CONFIG_HI_DOWNVQE_SUPPORT=y
+export CONFIG_HI_TALKVQE_SUPPORT=y
+export CONFIG_HI_RECORDVQE_SUPPORT=y
+export CONFIG_HI_TALKVQEV2_SUPPORT=y
+export CONFIG_HI_TALKVQEV2_WNR_SUPPORT=y
+# CONFIG_HI_AUDIO_STATIC_REGISTER_SUPPORT is not set
+# CONFIG_HI_AUDIO_BCD_SUPPORT is not set
+# CONFIG_HI_AUDIO_ALSA_SUPPORT is not set
+# CONFIG_HI_AUDIO_ONLY_DRIVER_SUPPORT is not set
+export CONFIG_HI_AUDIO_H7_NEW_VOICE_SUPPORT=y
+export CONFIG_HI_AUDIO_H7_NEW_VQE_SUPPORT=y
+
+#
+# media hdr config
+#
+
+#
+# media mcf config
+#
+# CONFIG_HI_MONO_COLOR_FUSION_SUPPORT is not set
+
+#
+# Device Driver Setup
+#
+
+#
+# drv config
+#
+export CONFIG_DRV=y
+export CONFIG_EXTDRV=y
+export CONFIG_INTERDRV=y
+export CONFIG_CIPHER=y
+export CONFIG_HIUSER=y
+export CONFIG_MIPI_TX=y
+export CONFIG_MIPI_RX=y
+export CONFIG_HI_IR=y
+export CONFIG_HI_WDG=y
+export CONFIG_HI_SYSCFG=y
+# CONFIG_HI_LSADC is not set
+export CONFIG_HI_IRQ=y
+export CONFIG_HI_PROC=y
+
+#
+# Component Setup
+#
+
+#
+# Component hdmi Config
+#
+export CONFIG_HI_HDMI_SUPPORT=y
+
+#
+# Component hifb Config
+#
+export CONFIG_HI_HIFB_SUPPORT=y
+# CONFIG_HI_HIFB_VGS is not set
+
+#
+# Component svp Config
+#
+export CONFIG_HI_SVP_SUPPORT=y
+export CONFIG_HI_SVP_CNN=y
+export CONFIG_HI_SVP_RUNTIME=y
+export CONFIG_HI_SVP_IVE=y
+export CONFIG_HI_SVP_IVE_CSC=y
+export CONFIG_HI_SVP_IVE_FILTER_AND_CSC=y
+export CONFIG_HI_SVP_IVE_NCC=y
+export CONFIG_HI_SVP_IVE_LBP=y
+export CONFIG_HI_SVP_IVE_NORM_GRAD=y
+export CONFIG_HI_SVP_IVE_ST_CANDI_CORNER=y
+export CONFIG_HI_SVP_IVE_RESIZE=y
+export CONFIG_HI_SVP_IVE_PERSP_TRANS=y
+export CONFIG_HI_SVP_IVE_KCF=y
+export CONFIG_HI_SVP_IVE_HOG=y
+export CONFIG_HI_SVP_MD=y
+
+#
+# Component photo Config
+#
+# CONFIG_HI_PHOTO_SUPPORT is not set
+
+#
+# Component tde Config
+#
+export CONFIG_HI_TDE_SUPPORT=y
+
+#
+# Component pciv Config
+#
+# CONFIG_HI_PCIV_SUPPORT is not set
+
+#
+# Component avs lut Config
+#
+# CONFIG_HI_AVS_LUT_SUPPORT is not set
+
+#
+# Component pos_query Config
+#
+# CONFIG_HI_POS_QUERY_SUPPORT is not set
+
+#
+# Component tzasc Config
+#
+# CONFIG_HI_TZASC_SUPPORT is not set
+
+#
+# Component motionfusion config
+#
+# CONFIG_HI_MOTIONFUSION_SUPPORT is not set
+
+#
+# Component pm Config
+#
+# CONFIG_HI_PM_SUPPORT is not set
+
+#
+# Component gpu Config
+#
+# CONFIG_HI_GPU_SUPPORT is not set
+
+#
+# HISYSLINK Setup
+#
+
+#
+# hisyslink config
+#
+# CONFIG_HISYSLINK is not set
+
+#
+# Debug Config
+#
+export CONFIG_HI_GDB_NO=y
+# CONFIG_HI_GDB_YES is not set
+export CONFIG_HI_GDB=n
+export CONFIG_HI_PROC_SHOW_SUPPORT=y
+export CONFIG_HI_LOG_TRACE_SUPPORT=y
+export CONFIG_HI_LOG_TRACE_ALL=y
+# CONFIG_HI_LOG_TRACE_ERR is not set
+# CONFIG_HI_LOG_TRACE_WARN is not set
+# CONFIG_HI_LOG_TRACE_INFO is not set
+export CONFIG_HI_LOG_TRACE_LEVEL=7
+
+#
+# Test Config
+#
