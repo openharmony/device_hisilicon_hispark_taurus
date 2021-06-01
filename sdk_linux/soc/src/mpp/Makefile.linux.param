@@ -1,0 +1,120 @@
+# Copyright (C) 2021 HiSilicon (Shanghai) Technologies CO., LIMITED.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+# use C01 to indicate uclibc, C02 to  indicate glibc, C05 to indicate LiteOS.
+ifeq ($(FPGA),n)
+	ifeq ($(LIBC),glibc)
+		export CVER?=.C02
+	else
+		export CVER?=.C01
+	endif
+else
+	ifeq ($(LIBC),glibc)
+		export CVER?=.C12
+	else
+		export CVER?=.C11
+	endif
+
+endif
+
+ifeq ($(HIARCH), $(filter $(HIARCH),hi3519av100 hi3516cv500))
+    ifeq ($(ARM_ARCH), smp)
+	POSTFIX:=
+    else
+	POSTFIX:=
+    endif
+endif
+
+ifeq ($(HIARCH), $(filter $(HI_SUBARCH),hi3519av100))
+    ifeq ($(ARM_ARCH), amp)
+    export CVER=.C$(DBG_FLAG)8
+    endif
+endif
+
+
+ifeq ($(HIARCH), hi3516cv500)
+    ifneq ($(CONFIG_CUSTOMER_VERSION), COMMON)
+    export CVER=.C$(DBG_FLAG)4
+    endif
+endif
+
+##############################################################################
+# Allocated the kernel position
+ifeq ($(MPP_BUILD), y)
+    ifeq ($(HIARCH),$(filter $(HIARCH), hi3559av100))
+        export KERNEL_ROOT?=$(HIWORK_PATH)/osdrv$(HI_SUBARCH)$(CVER)/open_source/linux/$(KERNEL_NAME)
+    else ifeq ($(HIARCH),$(filter $(HIARCH), hi3519av100 hi3516cv500))
+        export KERNEL_ROOT?=$(HIWORK_PATH)/osdrv$(HI_SUBARCH)$(CVER)/open_source/linux/$(KERNEL_NAME)$(POSTFIX)
+    else ifeq ($(HIARCH),$(filter $(HIARCH), hi3516ev200))
+	export KERNEL_ROOT?=$(HIWORK_PATH)/osdrv$(HIARCH)$(CVER)/open_source/linux/$(KERNEL_NAME)$(POSTFIX)
+    else
+        export KERNEL_ROOT?=$(HIWORK_PATH)/osdrv$(HIARCH)$(CVER)/open_source/linux/$(KERNEL_NAME)$(POSTFIX)
+    endif
+else
+    ifeq ($(HIARCH),$(filter $(HIARCH), hi3559av100es hi3559av100))
+		export KERNEL_ROOT?=$(SDK_PATH)/open_source/linux/$(KERNEL_NAME)
+	else ifeq ($(HIARCH),$(filter $(HIARCH), hi3516ev200))
+		export KERNEL_ROOT?=$(SDK_PATH)/open_source/linux/$(KERNEL_NAME)$(POSTFIX)
+    else
+        export KERNEL_ROOT?=$(OHOS_ROOT_PATH)/out/KERNEL_OBJ/kernel/src_tmp/linux-4.19
+    endif
+endif
+
+##############################################################################
+
+# Define cross compiler
+ifeq ($(CONFIG_USER_LLVM), y)
+    export COMPILER_PATH := $(OHOS_ROOT_PATH)/prebuilts/clang/host/linux-x86/clang-r353983c/bin
+    export CROSS_PATH := $(OHOS_ROOT_PATH)/prebuilts/gcc/linux-x86/arm/gcc-linaro-7.5.0-arm-linux-gnueabi/bin
+    export CC := $(COMPILER_PATH)/clang
+    export AR := $(CROSS_PATH)/$(CROSS)ar
+else
+    export CC := $(CROSS)gcc
+    export AR := $(CROSS)ar
+endif
+
+export REL_INC := $(REL_DIR)/include
+export REL_LIB := $(REL_DIR)/lib
+export REL_KO  := $(REL_DIR)/../../ko
+export REL_OBJ := $(REL_DIR)/obj
+export REL_INI := $(REL_DIR)/init
+export ADAPT_INC := $(REL_DIR)/include/adapt
+
+LIBS_LD_CFLAGS += -ldl
+MPP_CFLAGS += -Wno-date-time
+DRV_CFLAGS += -Wno-date-time
+
+ifeq ($(LIBC), uclibc)
+    MPP_CFLAGS += -D_GNU_SOURCE
+endif
+ifeq ($(MPP_BUILD), y)
+    DRV_CFLAGS += -Werror
+    MPP_CFLAGS += -Werror
+    LIBS_CFLAGS += -Werror
+endif
+
+ifeq ($(CONFIG_USER_LLVM), y)
+    COMPILER_TRIPLE += "CROSS_COMPILE=$(CROSS_PATH)/$(CONFIG_HI_CROSS)"
+    COMPILER_TRIPLE += "CC=$(COMPILER_PATH)/clang"
+    COMPILER_TRIPLE += "HOSTCC=$(COMPILER_PATH)/clang"
+    export COMPILER_TRIPLE
+endif
+
+export HI_KBUILD_EXTRA_SYMBOLS
+HI_KBUILD_EXTRA_SYMBOLS += "$(OSAL_ROOT)/$(OSTYPE)/kernel/Module.symvers"
+HI_KBUILD_EXTRA_SYMBOLS += "$(MPP_PATH)/cbb/base/Module.symvers"
+HI_KBUILD_EXTRA_SYMBOLS += "$(MPP_PATH)/cbb/sys/Module.symvers"
+#HI_KBUILD_EXTRA_SYMBOLS += "$(MPP_PATH)/component/securec/src/Module.symvers"

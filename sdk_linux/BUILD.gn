@@ -1,0 +1,15 @@
+# Copyright (C) 2021 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
+
+import("//build/ohos.gni")
+
+print("hispark_taurus_sdk in")
+group("hispark_taurus_sdk") {
+  deps = [
+    ":sdk_make"
+  ]
+}
+
+action("sdk_make") {
+  script = "build.sh"
+  outputs = ["${target_out_dir}/mpp_build.log"]
+}

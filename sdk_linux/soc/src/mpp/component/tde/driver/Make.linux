@@ -1,0 +1,132 @@
+# Copyright (C) 2021 HiSilicon (Shanghai) Technologies CO., LIMITED.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+DRIVER_DIR := $(PWD)
+
+ifneq ($(HI_MAKE_DEBUG),)
+EXTRA_CFLAGS +=-D$(HI_MAKE_DEBUG)
+endif
+
+ifeq ($(SIXTYFOUR_SYS_STATUS), y)
+EXTRA_CFLAGS += -DSIXFOUR_SYS_STATUS=1
+else
+EXTRA_CFLAGS += -DSIXFOUR_SYS_STATUS=0
+endif
+
+EXTRA_CFLAGS += $(DRV_CFLAGS)
+EXTRA_CFLAGS += -Wall -D$(HIARCH)  -D$(HI_FPGA)
+EXTRA_CFLAGS += -I$(SDK_PATH)/osal/include
+ifeq ($(CONFIG_HI_PROC_SHOW_SUPPORT),y)
+EXTRA_CFLAGS += -DCONFIG_HI_PROC_SHOW_SUPPORT
+endif
+CHIP_TYPE=CHIP_TYPE_$(HIARCH)
+KBUILD_EXTRA_SYMBOLS += $(HI_KBUILD_EXTRA_SYMBOLS)
+
+EXTRA_CFLAGS += -D$(CHIP_TYPE)
+ifeq ($(HIGDB),y)
+EXTRA_CFLAGS += -g
+endif
+
+EXTRA_CFLAGS += -DHI_TDE_MEMCOUNT_SUPPORT=0
+EXTRA_CFLAGS += -DHI_TDE_BUFFER=0x20000
+
+DRIVER_SRC+=src/src/tde_osr.c\
+		src/adp/tde_v2_0/tde_hal_k.c \
+		src/adp/tde_v2_0/tde_osictl_k.c \
+		src/src/tde_osilist.c \
+		src/src/wmalloc.c \
+		src/src/tde_ioctl.c \
+		src/src/tde_handle.c \
+		src/adp/tde_v2_0/tde_adp.c
+
+ifdef CONFIG_HI_PROC_SHOW_SUPPORT
+DRIVER_SRC+= src/src/tde_proc.c
+endif
+
+INIT_FILE := ../init/$(HIARCH)/$(OSTYPE)/tde_init.c
+INIT_HEAD := ../init/include/tde_init.h
+
+MOD_NAME := hi_tde
+
+EXTRA_CFLAGS += -DTDE_LOWPOWER
+
+
+DRIVER_SRC_O := $(DRIVER_SRC)
+DRIVER_SRC += $(INIT_FILE)
+
+$(ARCH_LIBNAME)_tde-objs := $(DRIVER_SRC:%.c=%.o)
+obj-m := $(ARCH_LIBNAME)_tde.o
+
+$(MOD_NAME)-objs := $(DRIVER_SRC_O:%.c=%.o)
+obj-m += $(MOD_NAME).o
+
+EXTRA_CFLAGS += -I$(DRIVER_DIR)/include/ \
+			   	-I$(DRIVER_DIR)/../include/ \
+				-I$(DRIVER_DIR)/../init/include/ \
+			   	-I$(DRV_ROOT)/common/mmz \
+			   	-I$(DRV_ROOT)/common/himedia/ \
+				-I$(SDK_PATH)/mpp/cbb/base/include \
+				-I$(SDK_PATH)/mpp/cbb/base/ext_inc \
+			   	-I$(SDK_PATH)/mpp/cbb/base/mkp/include \
+				-I$(SDK_PATH)/mpp/cbb/base/arch/$(ARCH_DIR)/include \
+				-I$(CBB_ROOT)/base/arch/$(HIARCH)/include/$(HI_SUBARCH) \
+				-I$(DRIVER_DIR)/src/include \
+				-I$(DRIVER_DIR)/src/adp/tde_v2_0 \
+				-I$(DRIVER_DIR)/src/src \
+				-I$(SDK_PATH)/mpp/cbb/include/adapt \
+				-I$(SDK_PATH)/mpp/cbb/include
+
+
+ifeq ($(FPGA),y)
+EXTRA_CFLAGS += -I$(SDK_PATH)/osdrv/$(ARCH_DIR)_fpga/linux/tools/board/reg-tools-1.0.0/include/common
+endif
+
+ifeq ($(CONFIG_DRIVER_SPACE_TYPE),user_space)
+EXTRA_CFLAGS :=$(subst base/,based/,$(EXTRA_CFLAGS))
+EXTRA_CFLAGS :=$(subst sys/,sysd/,$(EXTRA_CFLAGS))
+endif
+
+.PHONY: default clean
+default:
+	@echo $(tde-objs)
+	@echo $(EXTRA_CFLAGS)
+	@$(MAKE) -C $(KERNEL_ROOT) M=$(PWD) $(COMPILER_TRIPLE) modules
+	@cp -rf $(ARCH_LIBNAME)_tde.ko ../
+ifeq ($(CONFIG_DRIVER_SPACE_TYPE),kernel_space)
+	@mkdir -p $(REL_OBJ) && cp -rf $(MOD_NAME).o $(REL_OBJ)
+	@mkdir -p $(REL_INI) && cp -rf $(INIT_FILE) $(REL_INI)
+	@mkdir -p $(REL_INI) && cp -rf $(INIT_HEAD) $(REL_INI)
+endif
+
+clean:
+	@$(MAKE) -C $(KERNEL_ROOT) M=$(PWD) $(COMPILER_TRIPLE) clean
+	@rm -f $(REL_LIB)/libtde.a $(REL_LIB)/libtde.so
+ifeq ($(CONFIG_DRIVER_SPACE_TYPE),kernel_space)
+	@rm -f $(REL_INI)/tde_init.c
+	@rm -f $(REL_INI)/tde_init.h
+endif
+	@for x in `find . -name "*.o*"`;do rm -rf $$x;done
+	@for x in `find . -name "*.o.cmd"`;do rm -rf $$x;done
+	@for x in `find ../ -name "*.ko*"`;do rm -rf $$x;done
+	@for x in `find ../init/$(HIARCH)/$(OSTYPE)/ -name "*.ko*"`;do rm -rf $$x;done
+	@for x in `find ../init/$(HIARCH)/$(OSTYPE)/ -name "*.o.cmd"`;do rm -rf $$x;done
+	@for x in `find ../init/$(HIARCH)/$(OSTYPE)/ -name "*.o*"`;do rm -rf $$x;done
+	@for x in `find . -name "*.ko*"`;do rm -rf $$x;done
+	@for x in `find . -name "*.ko.cmd"`;do rm -rf $$x;done
+	@for x in `find . -name "*.mod.c"`;do rm -rf $$x;done
+	@for x in `find . -name "*.mod"`;do rm -rf $$x;done
+	@for x in `find . -name ".*cmd"`;do rm -rf $$x;done
+	@for x in `find . -name ".tmp_versions*"`;do rm -rf $$x;done

@@ -1,0 +1,309 @@
+# Copyright (C) 2021 HiSilicon (Shanghai) Technologies CO., LIMITED.
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+ifeq ($(PARAM_FILE), )
+    PARAM_FILE:=../Makefile.param
+    include $(PARAM_FILE)
+endif
+
+#*******************************************************************************
+#Set the cbb source code and include path
+export COMPONENT_ROOT   := $(SDK_PATH)/mpp/component
+export SECUREC_ROOT     := $(SDK_PATH)/mpp/component/securec
+export TZASC_ROOT       := $(SDK_PATH)/mpp/component/tzasc/$(HIARCH)
+export ARCH_ROOT        := $(CBB_ROOT)/base/arch/$(ARCH_DIR)
+export ARCH_HAL         := $(ARCH_ROOT)/hal
+export INIT_ROOT        := ../../init/$(OSTYPE)
+export VPSS_ROOT        := $(CBB_ROOT)/vpss
+export GDC_ROOT		:= $(CBB_ROOT)/gdc
+
+ifeq ($(HIARCH),hi3559av100es)
+    export VDEC_ROOT    := $(CBB_ROOT)/vdec/vdec_hi3559av100es
+    export VFMW_ROOT    := $(CBB_ROOT)/vfmw/vfmw_hi3559av100es
+else
+    export VDEC_ROOT    := $(CBB_ROOT)/vdec
+    export VFMW_ROOT    := $(CBB_ROOT)/vfmw/vfmw_v6.0
+endif
+
+ifeq ($(HIARCH),hi3516ev200)
+    export VGS_ROOT    := $(CBB_ROOT)/vgs/vgs_hi3516ev200
+else
+    export VGS_ROOT    := $(CBB_ROOT)/vgs/vgs
+endif
+
+export VENC_SRC_ROOT := $(CBB_ROOT)/venc
+export VENC_OBJ_ROOT := $(CBB_ROOT)/venc_pub
+
+export VENC_ROOT := $(shell if [ -d "$(VENC_SRC_ROOT)" ]; then echo "$(VENC_SRC_ROOT)"; else echo "$(VENC_OBJ_ROOT)"; fi)
+
+ifeq ($(HIARCH),hi3516cv500)
+    export MCF_ROOT    := $(CBB_ROOT)/mcf/mcf_hi3516cv500
+else ifeq ($(HIARCH),hi3516ev200)
+    export MCF_ROOT    := $(CBB_ROOT)/mcf/mcf_hi3516ev200
+else
+    export MCF_ROOT    := $(CBB_ROOT)/mcf/mcf_hi3559av100
+endif
+
+ifeq ($(HIARCH),$(filter $(HIARCH), hi3516cv500 hi3519av100))
+    STACK_CFLAGS += --warn-stack-usage=600
+else ifeq ($(HIARCH),hi3559av100)
+    STACK_CFLAGS += --warn-stack-usage=900
+else ifeq ($(HIARCH),hi3516ev200)
+    STACK_CFLAGS += --warn-stack-usage=700
+else
+
+endif
+
+export ISP_ROOT     := $(CBB_ROOT)/isp
+
+
+ifeq ($(HIARCH),hi3516ev200)
+        export TDE_ROOT    := tde/tde_hi3516ev200
+else
+        export TDE_ROOT    := tde/tde
+endif
+
+include $(SDK_PATH)/mpp/cfg.mak
+#*******************************************************************************
+# Include bvt all modules subdir INC.
+# The baseon head include file
+COMM_INC := -I$(CBB_ROOT)/include
+COMM_INC += -I$(CBB_ROOT)/include/adapt
+PUB_INC  := (CBB_ROOT)/include
+COMM_INC += -I$(CBB_ROOT)/init/include/$(OSTYPE)
+
+# chip common header
+COMM_INC += -I$(CBB_ROOT)/base/arch/$(HIARCH)/include
+COMM_INC += -I$(CBB_ROOT)/base/arch/$(HIARCH)/include/$(HI_SUBARCH)
+
+PUB_INC  += $(CBB_ROOT)/base/arch/$(HIARCH)/include
+PUB_INC  += $(CBB_ROOT)/base/arch/$(HIARCH)/include/$(HI_SUBARCH)
+
+# osal include
+COMM_INC += -I$(OSAL_ROOT)/include
+
+# securec include
+#COMM_INC += -I$(SECUREC_ROOT)/include
+
+# tzasc include
+COMM_INC += -I$(TZASC_ROOT)
+
+# cbb include
+COMM_INC += -I$(CBB_ROOT)/base/include/inner
+COMM_INC += -I$(CBB_ROOT)/base/include
+COMM_INC += -I$(CBB_ROOT)/base/include/adapt
+
+COMM_INC += -I$(CBB_ROOT)/sys/include
+COMM_INC += -I$(CBB_ROOT)/sys/include/adapt
+COMM_INC += -I$(CBB_ROOT)/sys/include/inner
+COMM_INC += -I$(CBB_ROOT)/sys/arch/include
+COMM_INC += -I$(CBB_ROOT)/sys/arch/$(HIARCH)/include
+
+COMM_INC += -I$(CBB_ROOT)/vi/include
+COMM_INC += -I$(CBB_ROOT)/vi/include/adapt
+
+COMM_INC += -I$(MCF_ROOT)/include
+
+COMM_INC += -I$(ISP_ROOT)/include
+COMM_INC += -I$(ISP_ROOT)/include/arch/$(HIARCH)/include
+COMM_INC += -I$(ISP_ROOT)/include/arch/$(HIARCH)/include/adapt
+COMM_INC += -I$(ISP_ROOT)/include/adapt
+COMM_INC += -I$(ISP_ROOT)/kernel/arch/$(HIARCH)/include
+COMM_INC += -I$(ISP_ROOT)/user/firmware/arch/$(HIARCH)/include
+COMM_INC += -I$(ISP_ROOT)/user/firmware/include
+COMM_INC += -I$(ISP_ROOT)/user/pq_ai/include
+
+COMM_INC += -I$(CBB_ROOT)/vo/vo_dev/include
+COMM_INC += -I$(CBB_ROOT)/vo/vo_dev/include/adapt
+
+COMM_INC += -I$(CBB_ROOT)/vo/include
+COMM_INC += -I$(CBB_ROOT)/vo/include/adapt
+
+COMM_INC += -I$(CBB_ROOT)/region/include
+COMM_INC += -I$(CBB_ROOT)/region/include/adapt
+
+COMM_INC += -I$(VGS_ROOT)/include
+COMM_INC += -I$(VGS_ROOT)/include/adapt
+
+COMM_INC += -I$(CBB_ROOT)/hdr/include
+COMM_INC += -I$(CBB_ROOT)/hdr/include/adapt
+COMM_INC += -I$(CBB_ROOT)/hdr/include/inner
+
+COMM_INC += -I$(VPSS_ROOT)/include
+COMM_INC += -I$(VPSS_ROOT)/include/adapt
+COMM_INC += -I$(VPSS_ROOT)/include/inner
+
+COMM_INC += -I$(CBB_ROOT)/avs/include
+COMM_INC += -I$(CBB_ROOT)/avs/include/inner
+COMM_INC += -I$(CBB_ROOT)/avs/include/adapt
+
+COMM_INC += -I$(CBB_ROOT)/dis/gmedis/include
+COMM_INC += -I$(CBB_ROOT)/dis/gmedis/include/adapt
+
+COMM_INC += -I$(GDC_ROOT)/include
+COMM_INC += -I$(GDC_ROOT)/include/adapt
+
+COMM_INC += -I$(VENC_ROOT)/include/h7
+COMM_INC += -I$(VENC_ROOT)/include/h7/inner_inc
+COMM_INC += -I$(VENC_ROOT)/include/h7/adapt
+#ifeq ($(CONFIG_HI_OMX_SUPPORT), y)
+COMM_INC += -I$(VENC_ROOT)/include/h7/omx
+#endif
+
+COMM_INC += -I$(VDEC_ROOT)/include/h7
+COMM_INC += -I$(VDEC_ROOT)/include/h7/inner
+COMM_INC += -I$(VDEC_ROOT)/include/h7/adapt
+
+COMM_INC += -I$(CBB_ROOT)/audio/include/h7
+COMM_INC += -I$(CBB_ROOT)/audio/include/h7/adapt
+COMM_INC += -I$(CBB_ROOT)/audio/include/h7/inner
+
+# cbb ext_inc
+COMM_INC += -I$(CBB_ROOT)/base/ext_inc
+COMM_INC += -I$(CBB_ROOT)/sys/ext_inc
+COMM_INC += -I$(CBB_ROOT)/vi/ext_inc
+COMM_INC += -I$(MCF_ROOT)/ext_inc
+COMM_INC += -I$(ISP_ROOT)/ext_inc
+COMM_INC += -I$(CBB_ROOT)/vo/ext_inc
+COMM_INC += -I$(CBB_ROOT)/vo/vo_dev/ext_inc
+COMM_INC += -I$(CBB_ROOT)/region/ext_inc
+COMM_INC += -I$(VGS_ROOT)/ext_inc
+COMM_INC += -I$(GDC_ROOT)/ext_inc
+COMM_INC += -I$(GDC_ROOT)/include/inner
+COMM_INC += -I$(GDC_ROOT)/arch//$(HIARCH)/algorithm/include
+COMM_INC += -I$(VPSS_ROOT)/ext_inc
+COMM_INC += -I$(CBB_ROOT)/dis/gmedis/ext_inc
+COMM_INC += -I$(CBB_ROOT)/dis/gyrodis/ext_inc
+COMM_INC += -I$(VDEC_ROOT)/ext_inc
+COMM_INC += -I$(CBB_ROOT)/jpegd/ext_inc
+COMM_INC += -I$(VENC_ROOT)/ext_inc
+COMM_INC += -I$(CBB_ROOT)/vedu/ext_inc
+COMM_INC += -I$(CBB_ROOT)/audio/ext_inc
+
+COMM_INC += -I$(CBB_ROOT)/sys/mkp/include
+COMM_INC += -I$(CBB_ROOT)/chnl/mkp/include/
+COMM_INC += -I$(VGS_ROOT)/mkp/include
+COMM_INC += -I$(CBB_ROOT)/region/mkp/include
+COMM_INC += -I$(CBB_ROOT)/dis/gmedis/mkp/include
+COMM_INC += -I$(CBB_ROOT)/dis/gyrodis/mkp/include
+COMM_INC += -I$(VDEC_ROOT)/mkp/include
+COMM_INC += -I$(CBB_ROOT)/jpegd/mkp/include
+COMM_INC += -I$(MCF_ROOT)/mkp/include
+
+
+# component include
+COMM_INC += -I$(COMPONENT_ROOT)/$(TDE_ROOT)/include
+COMM_INC += -I$(COMPONENT_ROOT)/$(TDE_ROOT)/driver/include
+COMM_INC += -I$(COMPONENT_ROOT)/hdmi/src/include
+#
+
+ifeq ($(CONFIG_DRIVER_SPACE_TYPE),user_space)
+COMM_INC +=-I $(SDK_PATH)/interdrv/common/hi_irq/include
+endif
+
+export CBB_PARAM_FILE
+#*******************************************************************************
+#used to linux kernel kbuild EXTRA_CFLAGS or huawei_liteos build flags.
+MKP_CFLAGS += -Wall -D$(HIARCH) -D$(HI_FPGA)
+
+ifeq ($(FPGA),y)
+MKP_CFLAGS += -D$(UMAP)
+endif
+
+#NOTES! pls active the macro USE_SYSCTL and _USE_LLI_,when you run in FPGA board
+#NOTES! pls Inactive these two macro if you run in 3510 DEMO board
+MKP_CFLAGS += -D_USE_LLI_
+MKP_CFLAGS += $(COMM_INC)
+
+ifeq ($(CONFIG_HI_GDC_NNIE_SHARE_RAM), y)
+        MKP_CFLAGS += -DHI_GDC_NNIE_SHARE_RAM_CTL
+endif
+
+ifeq ($(CONFIG_HI_VGS_STITCH_SUPPORT), y)
+        MKP_CFLAGS += -DHI_VGS_STITCH_CTL
+endif
+
+ifeq ($(CONFIG_HI_VPSS_SUPPORT), y)
+    VPSS_MPI_INC_DIR := $(VPSS_ROOT)/include
+endif
+
+ifeq ($(CONFIG_HI_VGS_SUPPORT), y)
+    VGS_MPI_INC_ADAPT := include
+endif
+
+ifeq ($(HIARCH), hi3559av100)
+ifeq ($(CONFIG_HI_VDEC_SUPPORT), y)
+    MPP_CFLAGS += -DVDH_DEC_SUPPORT
+endif
+endif
+
+ifeq ($(CONFIG_HI_VDEC_SUPPORT), y)
+    MPP_CFLAGS += -D$(CONFIG_VDEC_IP)
+
+    ifeq ($(CONFIG_VDEC_IP),$(filter $(CONFIG_VDEC_IP), VDEC_IP_VEDU VDEC_IP_VDH_VEDU))
+        MKP_CFLAGS+=-I $(CBB_ROOT)/vedu/mkp/include
+        MKP_CFLAGS+=-I $(CBB_ROOT)/vedu/arch/include
+        MKP_CFLAGS+=-I $(CBB_ROOT)/vedu/arch/$(HIARCH)/include
+        MKP_CFLAGS+=-I $(VFMW_ROOT)/firmware/include
+    endif
+    VDEC_MPI_INC_DIR := $(VDEC_ROOT)/include/h7
+endif
+
+#*******************************************************************************
+MPP_CFLAGS += -D$(HI_RLS_MODE)
+MKP_CFLAGS += $(MPP_CFLAGS)
+MKP_CFLAGS += $(DRV_CFLAGS)
+MPI_CFLAGS += $(MPP_CFLAGS)
+MPI_CFLAGS += $(COMM_INC)
+
+
+# mpi-mkp cbb include
+MPI_CFLAGS += -I$(CBB_ROOT)/base/mkp/include
+MPI_CFLAGS += -I$(CBB_ROOT)/sys/mkp/include
+MPI_CFLAGS += -I$(CBB_ROOT)/vi/mkp/include
+MPI_CFLAGS += -I$(MCF_ROOT)/mkp/include
+MPI_CFLAGS += -I$(CBB_ROOT)/vo/mkp/include
+MPI_CFLAGS += -I$(CBB_ROOT)/vo/vo_dev/mkp/include
+MPI_CFLAGS += -I$(VPSS_ROOT)/mkp/include
+MPI_CFLAGS += -I$(CBB_ROOT)/avs/mkp/include
+MPI_CFLAGS += -I$(GDC_ROOT)/mkp/include
+MPI_CFLAGS += -I$(VDEC_ROOT)/mkp/include
+#*******************************************************************************
+define maco_ln
+    $(foreach file,$(1), $(shell mkdir -p "$(2)";ln -sf $(file) "$(2)/$(notdir $(file))"))
+endef
+
+define maco_rm
+    $(foreach file,$(1), $(shell rm -f $(2)/$(notdir $(file))))
+endef
+
+define maco_cp
+    $(foreach file,$(1), $(shell mkdir -p "$(2)";cp -f $(file) "$(2)/$(notdir $(file))"))
+endef
+
+define maco_cp_file
+    if [ ! -z "$(1)" ];then cp -rf $(1) "$(2)"; fi
+endef
+
+define maco_rmemptydir
+    if [ -e $(1) ];then rmdir --ignore-fail-on-non-empty "$(1)"; fi
+endef
+
+#*******************************************************************************
+#
+export MKP_CFLAGS
+export MPI_CFLAGS
+export ISP_FLAGS
