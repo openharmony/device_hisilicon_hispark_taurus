@@ -136,32 +136,30 @@
                     deviceMatchAttr = "hisilicon_hi35xx_spi_2";
                 }
             }
-            device_sdio :: device {
+            device_mmc:: device {
                 device0 :: deviceNode {
-                    policy = 1;
-                    priority = 70;
+                    policy = 2;
+                    priority = 10;
                     permission = 0644;
-                    moduleName = "HDF_PLATFORM_SDIO";
-                    serviceName = "HDF_PLATFORM_SDIO_0";
-                    deviceMatchAttr = "hisilicon_hi35xx_sdio_0";
+                    moduleName = "hi3516_mmc_driver";
+                    serviceName = "HDF_PLATFORM_MMC_0";
+                    deviceMatchAttr = "hi3516_mmc_emmc";
                 }
                 device1 :: deviceNode {
                     policy = 1;
-                    priority = 70;
-                    permission = 0644;
-                    moduleName = "HDF_PLATFORM_SDIO";
-                    serviceName = "HDF_PLATFORM_SDIO_1";
-                    deviceMatchAttr = "hisilicon_hi35xx_sdio_1";
-                }
-            }
-            device_emmc :: device {
-                device0 :: deviceNode {
-                    policy = 2;
                     priority = 20;
                     permission = 0644;
-                    moduleName = "HDF_PLATFORM_EMMC";
-                    serviceName = "HDF_PLATFORM_EMMC_0";
-                    deviceMatchAttr = "hisilicon_hi35xx_emmc_0";
+                    moduleName = "hi3516_mmc_driver";
+                    serviceName = "HDF_PLATFORM_MMC_1";
+                    deviceMatchAttr = "hi3516_mmc_sd";
+                }
+                device2 :: deviceNode {
+                    policy = 1;
+                    priority = 30;
+                    permission = 0644;
+                    moduleName = "hi3516_mmc_driver";
+                    serviceName = "HDF_PLATFORM_MMC_2";
+                    deviceMatchAttr = "hi3516_mmc_sdio";
                 }
             }
             device_pwm :: device {
