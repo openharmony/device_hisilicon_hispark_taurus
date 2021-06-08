@@ -169,10 +169,6 @@ void SystemInit_MMCInit(void)
 #ifdef LOSCFG_DRIVERS_MMC
     dprintf("setting SDIO register ...\n");
     SDIO_setup();
-    dprintf("MMC dev init ...");
-    extern int SD_MMC_Host_init(void);
-    SD_MMC_Host_init();
-    LOS_Msleep(450);
 #endif
 }
 
@@ -358,10 +354,10 @@ void SystemInit(void)
     SystemInit_MMCInit();
     SystemInit_MemDevInit();
     SystemInit_GpioDevInit();
-    SystemInit_NetInit();  /* need to check later */
     SystemInit_SDKInit();
-    SystemInit_MountRootfs();
     SystemInit_HDFInit();
+    SystemInit_NetInit();  /* need to check later */
+    SystemInit_MountRootfs();
     SystemInit_ConsoleInit();
 #ifndef LOSCFG_DRIVERS_QUICKSTART
     SystemInit1();
