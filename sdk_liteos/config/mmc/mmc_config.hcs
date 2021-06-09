@@ -1,0 +1,49 @@
+root {
+    platform {
+        mmc_config {
+            template mmc_controller {
+                match_attr = "";
+                voltDef = 0;         // 3.3V
+                freqMin = 50000;
+                freqMax = 100000000;
+                freqDef = 400000;
+                maxBlkNum = 2048;
+                maxBlkSize = 512;
+                ocrDef = 0x300000;
+                caps2 = 0;
+                regSize = 0x118;
+                hostId = 0;
+                regBasePhy = 0x10020000;
+                irqNum = 63;
+                devType = 2;
+                caps = 0x0001e045;
+            }
+            controller_0x10100000 :: mmc_controller {
+                match_attr = "hi3516_mmc_emmc";
+                hostId = 0;
+                regBasePhy = 0x10100000;
+                irqNum = 96;
+                devType = 0;      // emmc
+                caps = 0xd001e045;
+                caps2 = 0x60;
+            }
+
+            controller_0x100f0000 :: mmc_controller {
+                match_attr = "hi3516_mmc_sd";
+                hostId = 1;
+                regBasePhy = 0x100f0000;
+                irqNum = 62;
+                devType = 1;      // sd
+                caps = 0xd001e005;
+            }
+            controller_0x10020000 :: mmc_controller {
+                match_attr = "hi3516_mmc_sdio";
+                hostId = 2;
+                regBasePhy = 0x10020000;
+                irqNum = 63;
+                devType = 2;     // sdio
+                caps = 0x0001e04d;
+            }
+        }
+    }
+}
