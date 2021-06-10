@@ -56,13 +56,6 @@
 #include "implementation/usb_init.h"
 #endif
 
-#ifdef LOSCFG_STORAGE_EMMC
-#include "mmc/block.h"
-#include "inode/inode.h"
-#define EMMC_SEC_SIZE 512
-#define EMMC_UBOOT_SIZE 0x100000
-#endif
-
 #ifdef LOSCFG_DRIVERS_MMC
 #include <asm/io.h>
 #define PWR_CTRL0_REG 0x12090000
@@ -249,6 +242,7 @@ void SystemInit_SDKInit(void)
 void SystemInit_MountRootfs(void)
 {
 #ifdef LOSCFG_PLATFORM_ROOTFS
+    LOS_Msleep(450);
     dprintf("OsMountRootfs start ...\n");
     OsMountRootfs();
     dprintf("OsMountRootfs end ...\n");
