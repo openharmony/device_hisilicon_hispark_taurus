@@ -6,6 +6,10 @@ if (!defined(ohos_lite)) {
 
 if (defined(ohos_lite)) {
   group("hispark_taurus") {
+    deps = []
+    if (ohos_kernel_type == "liteos_a") {
+        deps += [ "//device/hisilicon/build/hi3516dv300:hi3516dv300_image" ]
+    }
   }
 } else {
   print("hispark_taurus in")
