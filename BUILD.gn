@@ -9,8 +9,6 @@ if (defined(ohos_lite)) {
     deps = []
     if (ohos_kernel_type == "liteos_a") {
         deps += [ "//device/hisilicon/build/hi3516dv300:hi3516dv300_image" ]
-    } else if (ohos_kernel_type == "linux") {
-        deps += [ "//vendor/hisi/camera/dvkit_product/linux/hi3516dv300/Hi3516CV500_SDK_V2.0.3.0:linux_kernel" ]
     }
   }
 } else {
