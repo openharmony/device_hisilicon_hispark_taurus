@@ -6,6 +6,20 @@ if (!defined(ohos_lite)) {
 
 if (defined(ohos_lite)) {
   group("hispark_taurus") {
+    deps = []
+    if ((board_name == "hi3516dv300" || board_name == "hispark_taurus") &&
+      ohos_kernel_type == "liteos_a") {
+    deps += [ "//device/hisilicon/build/hi3516dv300:hi3516dv300_image" ]
+    } else if (board_name == "hispark_taurus" && ohos_kernel_type == "linux") {
+    deps += [ "//vendor/hisi/camera/dvkit_product/linux/hi3516dv300/Hi3516CV500_SDK_V2.0.3.0:linux_kernel" ]
+    } else if ((board_name == "hi3518ev300" || board_name == "hispark_aries") &&
+             ohos_kernel_type == "liteos_a") {
+    deps += [ "//device/hisilicon/build/hi3518ev300:hi3518ev300_make_kernel" ]
+    } else if (board_name == "aegis_hi3516dv300" &&
+             ohos_kernel_type == "liteos_a") {
+    deps +=
+        [ "//device/hisilicon/aegis_hi3516dv300/build:aegis_hi3516dv300_image" ]
+    }
   }
 } else {
   print("hispark_taurus in")
