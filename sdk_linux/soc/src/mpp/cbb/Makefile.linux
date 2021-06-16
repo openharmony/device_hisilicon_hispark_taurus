@@ -69,8 +69,13 @@ default:
 	#@$(MAKE) -C $(KERNEL_ROOT) M=$(PWD) $(COMPILER_TRIPLE) V=10 modules -j 24
 	@$(MAKE) -C $(KERNEL_ROOT) M=$(PWD) $(COMPILER_TRIPLE) $(COMPILER_TRIPLE) V=10 modules -j 24
 ifeq ($(HIGDB), n)
+ifeq ($(OHOS_LITE), y)
+	@$(CROSS_COMPILE)strip --strip-unneeded $(TARGET).ko
+	@$(CROSS_COMPILE)strip --strip-unneeded $(MOD_NAME).o
+else
 	@$(CROSS_PATH)/$(CROSS_COMPILE)strip --strip-unneeded $(TARGET).ko
 	@$(CROSS_PATH)/$(CROSS_COMPILE)strip --strip-unneeded $(MOD_NAME).o
+endif
 endif
 	@mkdir -p $(REL_KO)  && cp -rf $(TARGET).ko $(REL_KO) && chmod 777 $(REL_KO)/load*
 #	@mkdir -p $(REL_INC) && $(call maco_cp_file,$(INC_FILE),$(REL_INC))
