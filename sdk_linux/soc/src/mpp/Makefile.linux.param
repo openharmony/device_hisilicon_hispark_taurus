@@ -69,7 +69,11 @@ else
 	else ifeq ($(HIARCH),$(filter $(HIARCH), hi3516ev200))
 		export KERNEL_ROOT?=$(SDK_PATH)/open_source/linux/$(KERNEL_NAME)$(POSTFIX)
     else
+    ifeq ($(OHOS_LITE), y)
+        export KERNEL_ROOT?=$(OHOS_ROOT_PATH)/out/kernel/src_tmp/linux-4.19
+    else
         export KERNEL_ROOT?=$(OHOS_ROOT_PATH)/out/KERNEL_OBJ/kernel/src_tmp/linux-4.19
+    endif
     endif
 endif
 
@@ -77,10 +81,17 @@ endif
 
 # Define cross compiler
 ifeq ($(CONFIG_USER_LLVM), y)
+ifeq ($(OHOS_LITE), y)
+    export SYSROOT_PATH := $(OHOS_ROOT_PATH)/prebuilts/lite/sysroot
+    export COMPILER_PATH := $(OHOS_ROOT_PATH)/prebuilts/clang/ohos/linux-x86_64/clang-10.0.1/bin
+    export CC := $(COMPILER_PATH)/clang
+    export AR := ar
+else
     export COMPILER_PATH := $(OHOS_ROOT_PATH)/prebuilts/clang/host/linux-x86/clang-r353983c/bin
     export CROSS_PATH := $(OHOS_ROOT_PATH)/prebuilts/gcc/linux-x86/arm/gcc-linaro-7.5.0-arm-linux-gnueabi/bin
     export CC := $(COMPILER_PATH)/clang
     export AR := $(CROSS_PATH)/$(CROSS)ar
+endif
 else
     export CC := $(CROSS)gcc
     export AR := $(CROSS)ar
@@ -107,9 +118,13 @@ ifeq ($(MPP_BUILD), y)
 endif
 
 ifeq ($(CONFIG_USER_LLVM), y)
+ifeq ($(OHOS_LITE), y)
+    COMPILER_TRIPLE += "CROSS_COMPILE=arm-linux-gnueabi-"
+else
     COMPILER_TRIPLE += "CROSS_COMPILE=$(CROSS_PATH)/$(CONFIG_HI_CROSS)"
-    COMPILER_TRIPLE += "CC=$(COMPILER_PATH)/clang"
     COMPILER_TRIPLE += "HOSTCC=$(COMPILER_PATH)/clang"
+endif
+    COMPILER_TRIPLE += "CC=$(COMPILER_PATH)/clang"
     export COMPILER_TRIPLE
 endif
 
