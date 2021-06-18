@@ -43,10 +43,6 @@ CFG_INC += -I$(KERNEL_ROOT)/drivers/hi_fence
 EXTRA_CFLAGS += -DCONFIG_HIFB_FENCE_SUPPORT
 endif
 
-ifneq ($(findstring $(HIARCH), hi3516cv500),)
-EXTRA_CFLAGS += -DCONFIG_HIFB_SOFT_IRQ_SUPPORT
-endif
-
 KBUILD_EXTRA_SYMBOLS += $(HI_KBUILD_EXTRA_SYMBOLS)
 #***************************************************************************#
 
