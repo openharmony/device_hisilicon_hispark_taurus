@@ -83,3 +83,4 @@ sdk_linux/soc/lib_lite/libhi3516cv500_rc.so filter=lfs diff=lfs merge=lfs -text
 sdk_linux/soc/lib_lite/libhi3516cv500_vi.so filter=lfs diff=lfs merge=lfs -text
 sdk_linux/soc/lib_lite/lib_hiawb_natura.so filter=lfs diff=lfs merge=lfs -text
 sdk_linux/soc/lib_lite/lib_hidehaze.so filter=lfs diff=lfs merge=lfs -text
+sdk_linux/soc/lib/libisp.so filter=lfs diff=lfs merge=lfs -text
