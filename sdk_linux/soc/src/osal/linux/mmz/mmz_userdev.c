@@ -142,9 +142,6 @@ static int mmz_userdev_open(struct inode *inode, struct file *file)
     struct mmz_userdev_info *pmu = NULL;
 
     osal_unused(inode);
-    if (!capable(CAP_SYS_RAWIO)) {
-        return -EPERM;
-    }
 
     pmu = kmalloc(sizeof(*pmu), GFP_KERNEL);
     if (pmu == NULL) {
