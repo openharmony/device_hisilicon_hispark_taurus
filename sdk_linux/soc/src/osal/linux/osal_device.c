@@ -104,9 +104,6 @@ static int osal_open(struct inode *inode, struct file *file)
     struct osal_private_data *pdata = NULL;
 
     osal_unused(inode);
-    if (!capable(CAP_SYS_RAWIO) || !capable(CAP_SYS_ADMIN)) {
-        return -EPERM;
-    }
 
     himedia = (struct himedia_device *)file->private_data;
     if (himedia == NULL) {
