@@ -83,7 +83,8 @@ endif
 ifeq ($(CONFIG_USER_LLVM), y)
 ifeq ($(OHOS_LITE), y)
     export SYSROOT_PATH := $(OHOS_ROOT_PATH)/prebuilts/lite/sysroot
-    export COMPILER_PATH := $(OHOS_ROOT_PATH)/prebuilts/clang/ohos/linux-x86_64/clang-10.0.1/bin
+   # export COMPILER_PATH := $(OHOS_ROOT_PATH)/prebuilts/clang/ohos/linux-x86_64/clang-10.0.1/bin
+    export COMPILER_PATH := $(COMPILER_PATH_DIR)
     export CC := $(COMPILER_PATH)/clang
     export AR := ar
 else
