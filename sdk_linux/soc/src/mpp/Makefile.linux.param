@@ -70,7 +70,7 @@ else
 		export KERNEL_ROOT?=$(SDK_PATH)/open_source/linux/$(KERNEL_NAME)$(POSTFIX)
     else
     ifeq ($(OHOS_LITE), y)
-        export KERNEL_ROOT?=$(OHOS_ROOT_PATH)/out/kernel/src_tmp/linux-4.19
+        export KERNEL_ROOT?=$(OHOS_ROOT_PATH)/out/hispark_taurus/ipcamera_hispark_taurus_linux/kernel/linux-4.19
     else
         export KERNEL_ROOT?=$(OHOS_ROOT_PATH)/out/KERNEL_OBJ/kernel/src_tmp/linux-4.19
     endif
