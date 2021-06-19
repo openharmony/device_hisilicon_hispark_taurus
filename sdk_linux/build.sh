@@ -5,6 +5,7 @@ set -e
 OHOS_ROOT_PATH=$1
 OUTDIR=$2
 OHOS_LITE=$3
+COMPILER_DIR=$4
 
 if [ -z "${OHOS_ROOT_PATH}" ];then
     OHOS_ROOT_PATH=$(pwd)/../../../..
@@ -13,6 +14,9 @@ else
 fi
 
 export OHOS_ROOT_PATH
+if [ ${COMPILER_DIR} != "" ];then
+    export COMPILER_PATH_DIR=${COMPILER_DIR}/bin
+fi
 
 SDK_LINUX_SRC_PATH=${OHOS_ROOT_PATH}/device/hisilicon/hispark_taurus/sdk_linux
 SDK_LINUX_TMP_PATH=${OUTDIR}/sdk_linux/src_tmp

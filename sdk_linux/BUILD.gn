@@ -27,7 +27,11 @@ if (defined(ohos_lite)) {
   build_ext_component("sdk_make") {
     exec_path = rebase_path(".", root_build_dir)
     outdir = rebase_path("$root_out_dir")
-    command = "./build.sh ${ohos_root_path} ${outdir} y"
+    clang_dir = ""
+    if (ohos_build_compiler_dir != "") {
+        clang_dir = rebase_path("$ohos_build_compiler_dir")
+    }
+    command = "./build.sh ${ohos_root_path} ${outdir} y ${clang_dir}"
     deps = ["//kernel/linux/patches:linux_kernel"]
   }
 } else {
