@@ -38,7 +38,6 @@ insert_isp()
 insert_ko()
 {
     # driver load
-    insmod hi_securec.ko
     #insmod hi_osal.ko anony=1 mmz_allocator=hisi mmz=anonymous,0,$mmz_start,$mmz_size || report_error
     insmod hi_osal.ko anony=1 mmz_allocator=hisi mmz=anonymous,0,0xA8000000,384M
     insmod hi_irq.ko
