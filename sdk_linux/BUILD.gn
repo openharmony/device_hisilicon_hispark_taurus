@@ -9,7 +9,6 @@ if(defined(ohos_lite)) {
 SDK_LINUX_PATH = "//device/hisilicon/hispark_taurus/sdk_linux"
 SDK_LINUX_LIB_LITE_PATH = "$SDK_LINUX_PATH/soc/lib_lite"
 
-print("hispark_taurus_sdk in")
 group("hispark_taurus_sdk") {
   if (defined(ohos_lite)) {
       deps = [
