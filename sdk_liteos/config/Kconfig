@@ -1,0 +1,1 @@
+source "../../device/hisilicon/drivers/Kconfig"
