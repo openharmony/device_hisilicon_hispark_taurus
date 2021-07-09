@@ -88,7 +88,7 @@ ifeq ($(OHOS_LITE), y)
     export CC := $(COMPILER_PATH)/clang
     export AR := ar
 else
-    export COMPILER_PATH := $(OHOS_ROOT_PATH)/prebuilts/clang/host/linux-x86/clang-r353983c/bin
+    export COMPILER_PATH := $(COMPILER_PATH_DIR)
     export CROSS_PATH := $(OHOS_ROOT_PATH)/prebuilts/gcc/linux-x86/arm/gcc-linaro-7.5.0-arm-linux-gnueabi/bin
     export CC := $(COMPILER_PATH)/clang
     export AR := $(CROSS_PATH)/$(CROSS)ar
