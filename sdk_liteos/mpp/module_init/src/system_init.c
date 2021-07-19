@@ -21,6 +21,7 @@
 #include "los_process_pri.h"
 #include "disk.h"
 #include "sys/mount.h"
+#include "los_bootargs.h"
 #include "los_rootfs.h"
 #ifdef LOSCFG_DRIVERS_VIDEO
 #include "fb.h"
@@ -244,7 +245,15 @@ void SystemInit_MountRootfs(void)
 #ifdef LOSCFG_PLATFORM_ROOTFS
     LOS_Msleep(450);
     dprintf("OsMountRootfs start ...\n");
-    OsMountRootfs();
+    if (LOS_GetCmdLine()) {
+        PRINT_ERR("get cmdline error!\n");
+    }
+    if (LOS_ParseBootargs()) {
+        PRINT_ERR("parse bootargs error!\n");
+    }
+    if (OsMountRootfs()) {
+        PRINT_ERR("mount rootfs error!\n");
+    }
     dprintf("OsMountRootfs end ...\n");
 #endif
 }
