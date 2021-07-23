@@ -1,0 +1,54 @@
+# Copyright (C) 2021 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
+
+mpp_libs = [
+  "lib/libmpi.so",
+  "lib/lib_hiacs.so",
+  "lib/lib_hiir_auto.so",
+  "lib/lib_hiawb.so",
+  "lib/libive.so",
+  "lib/libdnvqe.so",
+  "lib/lib_hidrc.so",
+  "lib/lib_hildci.so",
+  "lib/libnnie.so",
+  "lib/libupvqe.so",
+  "lib/lib_hidehaze.so",
+  "lib/lib_hicalcflicker.so",
+  "lib/libVoiceEngine.so",
+  "lib/libisp.so",
+  "lib/libsns_imx335.so",
+  "lib/lib_hiae.so",
+  "lib/libhdmi.so",
+  "lib/libaacdec.so",
+  "lib/libaacenc.so",
+  "lib/libaaccomm.so",
+  "lib/libaacsbrdec.so",
+  "lib/libaacsbrenc.so",
+  "lib/libsecurec.so",
+  "lib/libtde.so",
+  "lib/libhive_RES.so",
+  "lib/libhive_record.so",
+  "lib/libhive_HPF.so",
+  "lib/libhive_ANR.so",
+  "lib/libhive_common.so",
+  "lib/libhive_AEC.so",
+  "lib/libhive_AGC.so",
+  "lib/libhive_EQ.so",
+]
+
+copy("copy_mpp_libs") {
+  sources = mpp_libs
+  outputs = [ "$root_out_dir/{{source_file_part}}" ]
+}
+
+group("mpp") {
+  deps = [
+    ":copy_mpp_libs",
+    "module_init",
+  ]
+}
+
+config("public") {
+  configs = [
+    "module_init:public",
+  ]
+}
