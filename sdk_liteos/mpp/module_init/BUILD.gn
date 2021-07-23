@@ -1,0 +1,63 @@
+# Copyright (C) 2021 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
+
+import("//kernel/liteos_a/liteos.gni")
+
+module_name = "module_init"
+kernel_module(module_name) {
+  sources = [
+    #"src/sdk_exit.c",
+    "src/sdk_init.c",
+    "src/system_init.c",
+  ]
+
+  lib_dirs = [ "lib" ]
+  libs = [
+    "sys_config",
+    "hi_osal",
+    "hi3516cv500_base",
+    "hi3516cv500_sys",
+    "hi_user",
+    "hi3516cv500_isp",
+    "hi3516cv500_vi",
+    "hi3516cv500_vo",
+    "hifb",
+    "hi3516cv500_vpss",
+    "hi3516cv500_vgs",
+    "hi3516cv500_tde",
+    "hi_mipi_rx",
+    "hi_mipi_tx",
+    "hi3516cv500_chnl",
+    "hi3516cv500_rc",
+    "hi3516cv500_rgn",
+    "hi3516cv500_vedu",
+    "hi3516cv500_venc",
+    "hi3516cv500_h265e",
+    "hi3516cv500_jpege",
+    "hi3516cv500_jpegd",
+    "hi3516cv500_h264e",
+    "hi3516cv500_vdec",
+    "hi3516cv500_hdmi",
+    "hi3516cv500_dis",
+    "hi3516cv500_gdc",
+    "hi_sensor_i2c",
+    "hi_sensor_spi",
+    "hi3516cv500_ai",
+    "hi3516cv500_ao",
+    "hi3516cv500_aio",
+    "hi3516cv500_aenc",
+    "hi3516cv500_adec",
+    "hi3516cv500_acodec",
+    "hi_sensor_spi",
+    "hi_pwm",
+    "hi_piris",
+    "hi3516cv500_ive",
+    "hi3516cv500_nnie",
+    "hi3516cv500_vfmw",
+    "hi3516cv500_cipher",
+  ]
+
+  all_dependent_configs = [ ":public" ]
+}
+
+config("public") {
+}

@@ -1,21 +1,13 @@
 # Copyright (C) 2021 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
 
-if (!defined(ohos_lite)) {
-  import("//build/ohos.gni")
-}
-
 if (defined(ohos_lite)) {
   group("hispark_taurus") {
     deps = []
-    if (ohos_kernel_type == "liteos_a") {
-      deps += [ "//device/hisilicon/build/hi3516dv300/liteos:hi3516dv300_image" ]
-    }
     if (ohos_kernel_type == "linux") {
       deps += [ "sdk_linux:hispark_taurus_sdk" ]
     }
   }
 } else {
-  print("hispark_taurus in")
   group("hispark_taurus") {
     deps = [ "sdk_linux:hispark_taurus_sdk" ]
   }
