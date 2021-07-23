@@ -27,7 +27,7 @@ include $(CIPHER_BASE_DIR)/drv/cipher_v1.0/build.mak
 
 MBEDTLS_DIR := $(CIPHER_BASE_DIR)/../mbedtls_prepare
 MBEDTLS_LIB := libmbedcrypto.a
-MBEDTLS_VER := mbedtls-2.16.8
+MBEDTLS_VER := mbedtls-2.16.10
 
 MPP_CFLAGS += $(CIPHER_API_CFLAGS)
 MPP_CFLAGS += $(CIPHER_DRV_CFLAGS)
