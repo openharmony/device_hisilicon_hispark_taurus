@@ -3,6 +3,7 @@
 group("sdk_liteos") {
   deps = [
     "board",
+    "config",
     "drivers",
     "mpp",
   ]
@@ -11,6 +12,7 @@ group("sdk_liteos") {
 config("public") {
   configs = [
     "board:public",
+    "config:public",
     "drivers:public",
     "mpp:public",
   ]
