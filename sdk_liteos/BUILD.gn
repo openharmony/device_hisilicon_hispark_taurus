@@ -1,0 +1,17 @@
+# Copyright (C) 2021 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
+
+group("sdk_liteos") {
+  deps = [
+    "board",
+    "drivers",
+    "mpp",
+  ]
+}
+
+config("public") {
+  configs = [
+    "board:public",
+    "drivers:public",
+    "mpp:public",
+  ]
+}
