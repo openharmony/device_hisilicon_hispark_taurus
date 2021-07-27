@@ -1,5 +1,6 @@
 #include "device_info/device_info.hcs"
 #include "i2c/i2c_config.hcs"
+#include "adc/adc_config.hcs"
 #include "gpio/gpio_config.hcs"
 #include "uart/uart_config.hcs"
 #include "mmc/mmc_config.hcs"
