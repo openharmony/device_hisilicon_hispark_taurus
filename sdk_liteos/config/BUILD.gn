@@ -29,12 +29,28 @@
 
 import("//drivers/adapter/khdf/liteos/hdf.gni")
 
+cmd = "if [ -f $product_path/config/BUILD.gn ]; then echo true; else echo false; fi"
+HAVE_PRODUCT_CONFIG = exec_script("//build/lite/run_shell_cmd.py", [ cmd ], "value")
+
 module_switch = defined(LOSCFG_DRIVERS_HDF)
 module_name = "hdf_config"
 hdf_driver(module_name) {
+  module_switch = module_switch && !HAVE_PRODUCT_CONFIG
   hcs_sources = [ "hdf.hcs" ]
 }
 
 group("config") {
-  public_deps = [ ":$module_name" ]
+  if (HAVE_PRODUCT_CONFIG) {
+    public_deps = [ "$product_path/config" ]
+  } else {
+    public_deps = [ ":$module_name" ]
+  }
+}
+
+config("public") {
+  if (HAVE_PRODUCT_CONFIG) {
+    configs = [ "$product_path/config:public" ]
+  } else {
+    configs = []
+  }
 }
