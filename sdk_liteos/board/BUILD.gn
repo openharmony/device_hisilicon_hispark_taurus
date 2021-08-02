@@ -37,6 +37,9 @@ kernel_module(module_name) {
   } else {
     libs = [ "libs/release/libbsp_config.a" ]
   }
+  sources = [
+    "board.c",
+  ]
 }
 
 group("board") {
