@@ -59,13 +59,11 @@ Note:If the text contains special characters, please escape them according to th
 		<licensefile>sdk_linux/soc/src/LICENSE|sdk_linux/soc/lib/LICENSE|sdk_linux/uboot/reg/LICENSE|prebuilts/LICENSE</licensefile>
         <policylist>
             <policy name="projectPolicy" desc="">
-				<policyitem type="license" name="EndUserLicenseAgreement" path="prebuilts/LICENSE" desc="LICENSE for file mkimage"/>
-				<policyitem type="license" name="EndUserLicenseAgreement" path="sdk_linux/soc/lib/LICENSE" desc="LICENSE for shared libraries within sdk_linux/soc/lib/"/>
-				<policyitem type="license" name="EndUserLicenseAgreement" path="sdk_linux/uboot/reg/LICENSE" desc="LICENSE for file reg_info_hi3516dv300.bin"/>
+				<policyitem type="license" name="EndUserLicenseAgreement" path=".*" desc="HiSilicon copyright"/>
                 <policyitem type="license" name="GPLStyleLicense" path="sdk_linux/soc/src/LICENSE" desc="LICENSE for all files within sdk_linux/soc/src/ which reside in kernel space"/>
-				<policyitem type="license" name="GPL-2.0+" path="sdk_linux/soc/src/.*" desc="Kernel space code"/>
+				<policyitem type="license" name="GPL-2.0" path=".*" desc="Kernel space code"/>
 
-                <policyitem type="copyright" name="Copyright (C) 2021 HiSilicon (Shanghai) Technologies CO., LIMITED." path="sdk_linux/soc/src/.*" desc="HiSilicon copyright"/>
+                <policyitem type="copyright" name="HiSilicon (Shanghai) Technologies CO., LIMITED." path=".*" desc="HiSilicon copyright"/>
 			</policy>
         </policylist>
 		<filefilterlist>
@@ -80,6 +78,7 @@ Note:If the text contains special characters, please escape them according to th
 				<filteritem type="filepath" name="sdk_linux/build.sh" desc="Compilation scripts do not declare license"/>
 				<filteritem type="filepath" name="sdk_linux/config.gni" desc="Compilation scripts do not declare license"/>
 				<filteritem type="filepath" name="sdk_linux/soc/ko/load3516dv300_user" desc="load script"/>
+				<filteritem type="filepath" name="sdk_liteos/uboot/.*" desc="uboot"/>
 				<!--filteritem type="filepath" name="dir name underproject/.*" desc="Describe the reason for filtering scan results"/-->
 			</filefilter>
 			<filefilter name="copyrightPolicyFilter" desc="Filters for copyright header policies" >
@@ -89,6 +88,7 @@ Note:If the text contains special characters, please escape them according to th
 				<filteritem type="filepath" name="sdk_linux/build.sh" desc="HiSilicon copyright"/>
 				<filteritem type="filepath" name="sdk_linux/config.gni" desc="HiSilicon copyright"/>
 				<filteritem type="filepath" name="sdk_linux/soc/ko/load3516dv300_user" desc="HiSilicon copyright"/>
+				<filteritem type="filepath" name="sdk_liteos/uboot/.*" desc="uboot"/>
 			</filefilter>
 			<filefilter name="licenseFileNamePolicyFilter" desc="Filters for LICENSE file policies" >
 				<!--filteritem type="filepath" name="dir name underproject/.*" desc="Describe the reason for filtering scan results"/-->
@@ -100,7 +100,7 @@ Note:If the text contains special characters, please escape them according to th
 				<!--filteritem type="filepath" name="dir name underproject/.*" desc="Describe the reason for filtering scan results"/-->
 			</filefilter>
 			<filefilter name="binaryFileTypePolicyFilter" desc="Filters for binary file policies" >
-                <filteritem type="filepath" name="sdk_linux/soc/lib/.*" desc="Shared libraries of Hisilicon self-developed multimedia processing platform, those libraries are under End User License Agreement declared in sdk_linux/soc/lib/LICENSE"/>
+                <filteritem type="filename" name="*.a|*.so|*.png|*.bin" desc="Shared libraries of Hisilicon self-developed multimedia processing platform, those libraries are under End User License Agreement declared in sdk_linux/soc/lib/LICENSE"/>
                 <filteritem type="filename" name="mkimage" desc="The third-party tool mkimage comes from device/hisilicon/third_party/uboot in where its license and copyright information were retained"/>
 				<filteritem type="filename" name="reg_info_hi3516dv300.bin" desc="Hisilicon self-developed file generated"/>
 			</filefilter>
