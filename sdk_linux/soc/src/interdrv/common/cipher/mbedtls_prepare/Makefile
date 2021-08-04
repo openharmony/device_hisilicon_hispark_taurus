@@ -42,7 +42,7 @@ OBJS_CRYPTO=    aes.o       aesni.o     arc4.o      \
         threading.o timing.o    version.o   \
         version_features.o      xtea.o
 
-MBEDTLS_VER := mbedtls-2.16.8
+MBEDTLS_VER := mbedtls-2.16.10
 MBEDTLS_DIR := $(PWD)/$(MBEDTLS_VER)
 MBEDTLS_SRC := $(OHOS_ROOT_PATH)/third_party/mbedtls
 CIPHER_DIR  := $(SDK_PATH)/interdrv/common/cipher
