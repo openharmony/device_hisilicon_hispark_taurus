@@ -1,18 +1,24 @@
 # Copyright (C) 2021 Hisilicon (Shanghai) Technologies Co., Ltd. All rights reserved.
 
+cmd = "if [ -f $product_path/hdf_config/BUILD.gn ]; then echo true; else echo false; fi"
+HAVE_PRODUCT_CONFIG = exec_script("//build/lite/run_shell_cmd.py", [ cmd ], "value")
+
 group("sdk_liteos") {
   deps = [
     "board",
-    "config",
     "drivers",
     "mpp",
   ]
+  if (HAVE_PRODUCT_CONFIG) {
+    deps += [ "$product_path/hdf_config" ]
+  } else {
+    deps += [ "hdf_config" ]
+  }
 }
 
 config("public") {
   configs = [
     "board:public",
-    "config:public",
     "drivers:public",
     "mpp:public",
   ]
