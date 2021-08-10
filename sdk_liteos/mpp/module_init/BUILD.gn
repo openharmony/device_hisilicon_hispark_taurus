@@ -10,10 +10,7 @@ kernel_module(module_name) {
     "src/system_init.c",
   ]
 
-  lib_dirs = [
-    "lib",
-    "//third_party/NuttX/drivers/usbdev/gadget",
-  ]
+  lib_dirs = [ "lib" ]
   libs = [
     "sys_config",
     "hi_osal",
@@ -57,7 +54,6 @@ kernel_module(module_name) {
     "hi3516cv500_nnie",
     "hi3516cv500_vfmw",
     "hi3516cv500_cipher",
-    "usb_dwc3",
   ]
 
   all_dependent_configs = [ ":public" ]
