@@ -110,6 +110,16 @@
                     deviceMatchAttr = "hisilicon_hi35xx_dmac_0";
                 }
             }
+			device_i2s :: device {
+                device0 :: deviceNode {
+                    policy = 1;
+                    priority = 60;
+                    permission = 0644;
+                    moduleName = "HDF_PLATFORM_I2S";
+                    serviceName = "HDF_PLATFORM_I2S_0";
+                    deviceMatchAttr = "hisilicon_hi35xx_i2s_0";
+                }
+            }
             device_spi :: device {
                 device0 :: deviceNode {
                     policy = 1;

@@ -1,0 +1,28 @@
+root {
+    platform {
+        i2s_config {
+            template i2s_controller {
+                serviceName = "";
+                match_attr = "";
+                busNum = 0;
+				i2s_pad_enable = 1;
+				audio_enable = 0;
+				regBase = 0x113B0000;
+				PERI_CRG103 = 0xa;
+				MCLK = 12288;        /* KHZ */
+				aiao_srst_req = 1;   /* 1 reset-->RX0 channel reset */
+				aiao_cken = 0;       /* 0 close MCLK/BCLK/WS clk gate */
+				BCLK = 3072;         /* KHZ */
+				i2sl_fs_sel = 0x1a;  /* MCLK=256fs */
+				irqNum = 0;
+            }
+
+            controller_0x113b0000 :: i2s_controller {
+                busNum = 0;
+				regBase = 0x113B0000;
+                match_attr = "hisilicon_hi35xx_i2s_0";
+				irqNum = 87;
+            }
+        }
+    }
+}
