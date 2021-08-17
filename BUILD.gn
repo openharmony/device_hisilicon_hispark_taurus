@@ -5,6 +5,8 @@ if (defined(ohos_lite)) {
     deps = []
     if (ohos_kernel_type == "linux") {
       deps += [ "sdk_linux:hispark_taurus_sdk" ]
+    } else if (ohos_kernel_type == "liteos_a") {
+      deps += [ "sdk_liteos/mpp:copy_mpp_libs" ]
     }
   }
 } else {
