@@ -7,7 +7,7 @@ group("sdk_liteos") {
   deps = [
     "board",
     "drivers",
-    "mpp",
+    "mpp/module_init",
   ]
   if (HAVE_PRODUCT_CONFIG) {
     deps += [ "$product_path/hdf_config" ]
@@ -20,6 +20,5 @@ config("public") {
   configs = [
     "board:public",
     "drivers:public",
-    "mpp:public",
   ]
 }
