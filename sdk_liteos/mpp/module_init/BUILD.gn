@@ -5,7 +5,6 @@ import("//kernel/liteos_a/liteos.gni")
 module_name = "module_init"
 kernel_module(module_name) {
   sources = [
-    #"src/sdk_exit.c",
     "src/sdk_init.c",
     "src/system_init.c",
   ]
@@ -55,9 +54,4 @@ kernel_module(module_name) {
     "hi3516cv500_vfmw",
     "hi3516cv500_cipher",
   ]
-
-  all_dependent_configs = [ ":public" ]
-}
-
-config("public") {
 }
