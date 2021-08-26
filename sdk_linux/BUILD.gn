@@ -14,13 +14,13 @@ group("hispark_taurus_sdk") {
   if (defined(ohos_lite)) {
     deps = [
       ":sdk_linux_lite_libs",
-      "//kernel/linux/patches:linux_kernel",
+      "//kernel/linux/build:linux_kernel",
     ]
   } else {
     deps = [
       ":sdk_linux_modules",
       ":sdk_make",
-      "//kernel/linux/patches:linux_kernel",
+      "//kernel/linux/build:linux_kernel",
     ]
   }
 }
@@ -54,7 +54,7 @@ if (defined(ohos_lite)) {
       clang_dir = rebase_path("$ohos_build_compiler_dir")
     }
     command = "./build.sh ${ohos_root_path} ${outdir} y ${clang_dir}"
-    deps = [ "//kernel/linux/patches:linux_kernel" ]
+    deps = [ "//kernel/linux/build:linux_kernel" ]
   }
   not_needed(sdk_modules_name_list)
 } else {
@@ -74,7 +74,7 @@ if (defined(ohos_lite)) {
       "n",
       rebase_path("$clang_base_path"),
     ]
-    deps = [ "//kernel/linux/patches:linux_kernel" ]
+    deps = [ "//kernel/linux/build:linux_kernel" ]
   }
 
   sdk_modules_file_list = get_target_outputs(":sdk_make")
