@@ -649,6 +649,9 @@ EXPORT_SYMBOL(hil_mmb_getby_phys);
 unsigned long usr_virt_to_phys(unsigned long virt)
 {
     pgd_t *pgd = NULL;
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+	p4d_t *p4d = NULL;
+#endif
     pud_t *pud = NULL;
     pmd_t *pmd = NULL;
     pte_t *pte = NULL;
@@ -673,7 +676,12 @@ unsigned long usr_virt_to_phys(unsigned long virt)
         return 0;
     }
 
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+	p4d = p4d_offset(pgd, virt);
+    pud = pud_offset(p4d, virt);
+#else
     pud = pud_offset(pgd, virt);
+#endif
     if (pud_none(*pud)) {
         osal_trace("osal_trace: not mapped in pud!\n");
         return 0;
@@ -1066,16 +1074,28 @@ int hil_mmb_flush_dcache_byaddr_safe(void *kvirt,
         return -EINVAL;
     }
 
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+    down_read(&mm->mmap_lock);
+#else
     down_read(&mm->mmap_sem);
+#endif
 
     if (hil_vma_check((unsigned long)(uintptr_t)kvirt, (unsigned long)(uintptr_t)kvirt + length)) {
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+        up_read(&mm->mmap_lock);
+#else
         up_read(&mm->mmap_sem);
+#endif
         return -EPERM;
     }
 
     ret = hil_mmb_flush_dcache_byaddr(kvirt, phys_addr, length);
 
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+    up_read(&mm->mmap_lock);
+#else
     up_read(&mm->mmap_sem);
+#endif
 
     return ret;
 }
