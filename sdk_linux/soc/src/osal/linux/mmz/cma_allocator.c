@@ -20,13 +20,18 @@
 #include <linux/slab.h>
 #include <linux/init.h>
 #include <linux/delay.h>
+#include <linux/version.h>
 #include <asm/uaccess.h>
 #include <asm/io.h>
 #include <linux/list.h>
 #include <asm/cacheflush.h>
 
 #include <asm/memory.h>
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+#include <linux/dma-map-ops.h>
+#else
 #include <linux/dma-contiguous.h>
+#endif
 #include <linux/dma-mapping.h>
 #include <asm/memory.h>
 #ifndef CONFIG_64BIT
@@ -57,13 +62,19 @@ unsigned long max_malloc_size = 0x40000000UL;
 
 
 #ifndef CONFIG_64BIT
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+static int __dma_update_pte(pte_t* pte, unsigned long addr, void* data)
+#else
 static int __dma_update_pte(pte_t* pte, pgtable_t token,
                             unsigned long addr, void* data)
+#endif
 {
     struct page* page = virt_to_page(addr);
     pgprot_t prot = *(pgprot_t*)data;
 
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5,10,0)
     osal_unused(token);
+#endif
     set_pte_ext(pte, mk_pte(page, prot), 0);
 
     return 0;
@@ -388,14 +399,22 @@ static void *__mmb_map2kern(hil_mmb_t *mmb, int cached)
             tmp++;
         }
 
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,8,0)
+        area = __get_vm_area_caller((pagesnr << PAGE_SHIFT), VM_MAP, VMALLOC_START, VMALLOC_END,
+									__builtin_return_address(0));
+#else
         area = __get_vm_area((pagesnr << PAGE_SHIFT), VM_MAP, VMALLOC_START, VMALLOC_END);
+#endif
         if (area == NULL) {
             osal_trace(KERN_ERR "get vm area from high failed!\n");
             vfree(pages);
             return NULL;
         }
-
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,8,0)
+        if (map_kernel_range((unsigned long)area->addr, get_vm_area_size(area), prot, pages)) {
+#else
         if (map_vm_area(area, prot, pages)) {
+#endif
             osal_trace(KERN_ERR "map vm area to mmz pages failed!\n");
             vunmap(area->addr);
             vfree(pages);
@@ -500,7 +519,11 @@ static void *__mmf_map(phys_addr_t phys, int len, int cache)
         tmp++;
     }
 
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,8,0)
+    area = __get_vm_area_caller((pagesnr << PAGE_SHIFT), VM_MAP, VMALLOC_START, VMALLOC_END, __builtin_return_address(0));
+#else
     area = __get_vm_area((pagesnr << PAGE_SHIFT), VM_MAP, VMALLOC_START, VMALLOC_END);
+#endif
     if (area == NULL) {
         osal_trace(KERN_ERR "get vm area from high failed!\n");
         vfree(pages);
@@ -508,7 +531,11 @@ static void *__mmf_map(phys_addr_t phys, int len, int cache)
         return NULL;
     }
 
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,8,0)
+    if (map_kernel_range((unsigned long)area->addr, get_vm_area_size(area), prot, pages)) {
+#else
     if (map_vm_area(area, prot, pages)) {
+#endif
         osal_trace(KERN_ERR "map vm area to mmz pages failed!\n");
         vunmap(area->addr);
         vfree(pages);
