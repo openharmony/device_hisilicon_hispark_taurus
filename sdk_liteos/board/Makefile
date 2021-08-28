@@ -21,33 +21,7 @@ else
 	RELEASE_TYPE := release
 endif
 
-DIR = temp
-LIB = lib$(MODULE_NAME).a
+LOCAL_SRCS := board.c
+ARFLAGS = r $$(cp libs/$(RELEASE_TYPE)/lib$(MODULE_NAME).a $@)
 
-SRCS = board.c
-OBJS = $(patsubst %.c,$(DIR)/%.o,$(SRCS))
-
-$(OBJS): $(DIR)/%.o : %.c
-	@$(CC) $(LITEOS_CFLAGS) -c $< -o $@
-
-COBJS = $(OBJS)
-
-$(COBJS): $(DIR)
-
-$(DIR):
-	@mkdir -p $@
-
-$(LIB): $(COBJS)
-	@$(AR) -x -o libs/$(RELEASE_TYPE)/$@
-	@mv *.o $(DIR)
-	@$(AR) cr $(DIR)/$@ $(DIR)/*.o
-
-all: $(LIB)
-	@if [ ! -d $(OUT)/lib ]; then mkdir -p $(OUT)/lib; fi
-	@cp -rf $(DIR)/$(LIB) $(OUT)/lib
-
-clean:
-	@rm -rf $(OUT)$(LIB)
-	@rm -rf $(DIR)
-
-.PHONY: all clean
+include $(MODULE)
