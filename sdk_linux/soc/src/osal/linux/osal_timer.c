@@ -25,6 +25,7 @@
 #include <linux/sched.h>
 #include <linux/rtc.h>
 #include <linux/sched/clock.h>
+#include <linux/version.h>
 #include "hi_osal.h"
 
 struct timer_list_info {
@@ -130,6 +131,17 @@ EXPORT_SYMBOL(osal_sched_clock);
 
 void osal_gettimeofday(osal_timeval_t *tv)
 {
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+    struct timespec64 t;
+    if (tv == NULL) {
+        osal_trace("%s - parameter invalid!\n", __FUNCTION__);
+        return;
+    }
+    ktime_get_real_ts64(&t);
+
+    tv->tv_sec = t.tv_sec;
+    tv->tv_usec = t.tv_nsec;
+#else
     struct timeval t;
     if (tv == NULL) {
         osal_trace("%s - parameter invalid!\n", __FUNCTION__);
@@ -139,6 +151,7 @@ void osal_gettimeofday(osal_timeval_t *tv)
 
     tv->tv_sec = t.tv_sec;
     tv->tv_usec = t.tv_usec;
+#endif
 }
 EXPORT_SYMBOL(osal_gettimeofday);
 
@@ -146,8 +159,11 @@ void osal_rtc_time_to_tm(unsigned long time, osal_rtc_time_t *tm)
 {
     struct rtc_time _tm = {0};
 
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+    rtc_time64_to_tm(time, &_tm);
+#else
     rtc_time_to_tm(time, &_tm);
-
+#endif
     tm->tm_sec = _tm.tm_sec;
     tm->tm_min = _tm.tm_min;
     tm->tm_hour = _tm.tm_hour;
@@ -173,7 +189,11 @@ void osal_rtc_tm_to_time(osal_rtc_time_t *tm, unsigned long *time)
     _tm.tm_yday = tm->tm_yday;
     _tm.tm_isdst = tm->tm_isdst;
 
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+    *time = rtc_tm_to_time64(&_tm);
+#else
     rtc_tm_to_time(&_tm, time);
+#endif
 }
 EXPORT_SYMBOL(osal_rtc_tm_to_time);
 

@@ -478,8 +478,10 @@ struct dma_buf_ops g_hifb_mem_block_ops = {
     .map_dma_buf = hifb_memblock_map,
     .unmap_dma_buf = hifb_memblock_unmap,
     .release = hifb_memblock_release,
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5,6,0)
     .map = hifb_memblock_kmap,
     .unmap = hifb_memblock_kunmap,
+#endif
     .mmap = hifb_memblock_mmap,
 };
 

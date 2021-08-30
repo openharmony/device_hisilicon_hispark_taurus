@@ -20,7 +20,11 @@
 lib-y += $(OBJS)
 
 all:mbedtls_patch
+ifeq ($(KERNEL_VERSION), linux-4.19)
 	@make -C $(KERNEL_ROOT) M=$(PWD) $(COMPILER_TRIPLE)
+else ifeq ($(KERNEL_VERSION), linux-5.10)
+	@make -C $(KERNEL_ROOT) M=$(PWD) $(COMPILER_TRIPLE) KBUILD_BUILTIN=1
+endif
 
 mbedtls_patch:
 	@test -d $(MBEDTLS_DIR) || \

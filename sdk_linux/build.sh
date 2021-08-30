@@ -7,6 +7,8 @@ OUTDIR=$2
 OHOS_LITE=$3
 COMPILER_DIR=$4
 
+export KERNEL_VERSION="linux-4.19"
+
 if [ -z "${OHOS_ROOT_PATH}" ];then
     OHOS_ROOT_PATH=$(pwd)/../../../..
 else

@@ -458,10 +458,17 @@ static int ioctl_mmb_user_unmap(struct file *file, struct mmb_info *pmi)
     /* before unmap, refresh cache manually */
     if (p->map_cached) {
         struct mm_struct *mm = current->mm;
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+        down_read(&mm->mmap_lock);
+        if (hil_vma_check(addr, addr + len)) {
+            error_mmz("mmb<%s> vma is invalid.\n", p->mmb->name);
+            up_read(&mm->mmap_lock);
+#else
         down_read(&mm->mmap_sem);
         if (hil_vma_check(addr, addr + len)) {
             error_mmz("mmb<%s> vma is invalid.\n", p->mmb->name);
             up_read(&mm->mmap_sem);
+#endif
             return -EPERM;
         }
 #ifdef CONFIG_64BIT
@@ -472,7 +479,11 @@ static int ioctl_mmb_user_unmap(struct file *file, struct mmb_info *pmi)
         outer_flush_range(p->phys_addr, p->phys_addr + len);
 #endif
 #endif /* CONFIG_64BIT */
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+        up_read(&mm->mmap_lock);
+#else
         up_read(&mm->mmap_sem);
+#endif
     }
 
     ret = vm_munmap(addr, len);
@@ -799,14 +810,22 @@ static long mmz_userdev_ioctl(struct file *file, unsigned int cmd, unsigned long
             goto __error_exit;
         }
 
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+        down_read(&mm->mmap_lock);
+#else
         down_read(&mm->mmap_sem);
+#endif
 
         if (hil_vma_check((uintptr_t)area.dirty_virt_start, (uintptr_t)area.dirty_virt_start + area.dirty_size)) {
             osal_trace(KERN_WARNING "\ndirty area[0x%lx,0x%lx] overflow!\n",
                    (unsigned long)(uintptr_t)area.dirty_virt_start,
                    (unsigned long)(uintptr_t)area.dirty_virt_start + area.dirty_size);
             ret = -EFAULT;
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+            up_read(&mm->mmap_lock);
+#else
             up_read(&mm->mmap_sem);
+#endif
             goto __error_exit;
         }
 
@@ -820,7 +839,11 @@ static long mmz_userdev_ioctl(struct file *file, unsigned int cmd, unsigned long
                           (CACHE_LINE_SIZE - 1)) & ~(CACHE_LINE_SIZE - 1);
 
         mmz_flush_dcache_mmb_dirty(&area);
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+        up_read(&mm->mmap_lock);
+#else
         up_read(&mm->mmap_sem);
+#endif
     } else if (_IOC_TYPE(cmd) == 't') {
         struct mmb_info mi;
 
