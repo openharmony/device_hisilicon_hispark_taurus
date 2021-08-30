@@ -476,7 +476,6 @@ static int hiirq_interrupt(int irq, void *dev_id)
 
     irq_node = get_list_node(irq, dev_id);
     if (irq_node == NULL || irq_node->irq_attr.enable_flag != HI_TRUE) {
-        hiirq_trace("[%s,line:%d]invalid irq state:%d\n", HIIRQ_PFX, __LINE__, irq_node == NULL);
         return OSAL_IRQ_NONE;
     } else {
         irq_spin_lock(flags);
