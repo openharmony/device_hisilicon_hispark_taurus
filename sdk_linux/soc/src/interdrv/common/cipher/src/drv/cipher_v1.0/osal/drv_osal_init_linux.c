@@ -115,6 +115,14 @@ static int symc_proc_open(struct inode *inode, struct file *file)
     return single_open(file, symc_proc_read, NULL);
 }
 
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,6,0)
+static const struct proc_ops g_drv_cipher_proc_fops = {
+    .proc_open = symc_proc_open,
+    .proc_read = seq_read,
+    .proc_lseek = seq_lseek,
+    .proc_release = single_release,
+};
+#else
 static const struct file_operations g_drv_cipher_proc_fops = {
     .owner   = THIS_MODULE,
     .open    = symc_proc_open,
@@ -122,6 +130,7 @@ static const struct file_operations g_drv_cipher_proc_fops = {
     .llseek  = seq_lseek,
     .release = single_release,
 };
+#endif
 
 static hi_void symc_proc_init(hi_void)
 {

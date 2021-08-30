@@ -19,6 +19,7 @@
 #include "hi_osal.h"
 #include <linux/module.h>
 #include <linux/kernel.h>
+#include <linux/version.h>
 #include <asm/io.h>
 #include <asm/uaccess.h>
 #include <linux/version.h>
@@ -40,7 +41,11 @@ EXPORT_SYMBOL(osal_ioremap);
 
 void *osal_ioremap_nocache(unsigned long phys_addr, unsigned long size)
 {
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+    return ioremap(phys_addr, size);
+#else
     return ioremap_nocache(phys_addr, size);
+#endif
 }
 EXPORT_SYMBOL(osal_ioremap_nocache);
 
@@ -81,6 +86,10 @@ EXPORT_SYMBOL(osal_copy_to_user);
 
 int osal_access_ok(int type, const void *addr, unsigned long size)
 {
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,10,0)
+    return access_ok(addr, size);
+#else
     return access_ok(type, addr, size);
+#endif
 }
 EXPORT_SYMBOL(osal_access_ok);

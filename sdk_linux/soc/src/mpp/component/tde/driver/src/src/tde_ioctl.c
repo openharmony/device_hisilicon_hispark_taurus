@@ -17,6 +17,7 @@
  */
 
 #ifndef HI_BUILD_IN_BOOT
+#include <linux/version.h>
 #ifndef __RTOS__
 #include "tde_init.h"
 #ifdef CONFIG_64BIT
@@ -132,7 +133,11 @@ struct osal_fileops g_tde_fops = {
 unsigned int g_tde_irq = TDE_INTNUM;
 static osal_dev_t *g_tde_device;
 #ifndef __RTOS__
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,9,0)
+DECLARE_TASKLET_OLD(tde_tasklet, tde_tasklet_func);
+#else
 DECLARE_TASKLET(tde_tasklet, tde_tasklet_func, 0);
+#endif
 #endif
 
 #ifdef CONFIG_TDE_TDE_EXPORT_FUNC

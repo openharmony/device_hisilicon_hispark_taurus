@@ -47,7 +47,11 @@
 
 #include "linux/uaccess.h"
 
+#if LINUX_VERSION_CODE > KERNEL_VERSION(5,6,0)
+#define crypto_ioremap_nocache(addr, size)  ioremap(addr, size)
+#else
 #define crypto_ioremap_nocache(addr, size)  ioremap_nocache(addr, size)
+#endif
 #define crypto_iounmap(addr, size)          iounmap(addr)
 
 #define crypto_read(addr)       readl(addr)
