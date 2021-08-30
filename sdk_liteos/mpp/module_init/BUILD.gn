@@ -9,7 +9,10 @@ kernel_module(module_name) {
     "src/system_init.c",
   ]
 
-  lib_dirs = [ "lib" ]
+  lib_dirs = [
+    "lib",
+    "//device/hisilicon/hispark_taurus/sdk_liteos/drivers/",
+  ]
   libs = [
     "sys_config",
     "hi_osal",
@@ -53,5 +56,6 @@ kernel_module(module_name) {
     "hi3516cv500_nnie",
     "hi3516cv500_vfmw",
     "hi3516cv500_cipher",
+    "usb_dwc3",
   ]
 }
