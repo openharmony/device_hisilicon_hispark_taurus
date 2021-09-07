@@ -6,6 +6,7 @@ if (defined(ohos_lite)) {
   import("//build/config/clang/clang.gni")
   import("//build/ohos.gni")
 }
+import("//build/ohos/kernel/kernel.gni")
 
 SDK_LINUX_PATH = "//device/hisilicon/hispark_taurus/sdk_linux"
 SDK_LINUX_LIB_LITE_PATH = "$SDK_LINUX_PATH/soc/lib_lite"
@@ -53,7 +54,7 @@ if (defined(ohos_lite)) {
     if (ohos_build_compiler_dir != "") {
       clang_dir = rebase_path("$ohos_build_compiler_dir")
     }
-    command = "./build.sh ${ohos_root_path} ${outdir} y ${clang_dir}"
+    command = "./build.sh ${ohos_root_path} ${outdir} y ${clang_dir} ${linux_kernel_version}"
     deps = [ "//kernel/linux/build:linux_kernel" ]
   }
   not_needed(sdk_modules_name_list)
@@ -73,6 +74,7 @@ if (defined(ohos_lite)) {
       rebase_path("$sdk_tmp_root_path"),
       "n",
       rebase_path("$clang_base_path"),
+      linux_kernel_version
     ]
     deps = [ "//kernel/linux/build:linux_kernel" ]
   }
