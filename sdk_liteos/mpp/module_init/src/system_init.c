@@ -162,6 +162,9 @@ void SystemInit(void)
     dprintf("setting SDIO register ...\n");
     SDIO_setup();
     dprintf("MMC dev init ...");
+#ifdef LOSCFG_STORAGE_EMMC
+    DiskEventInit();
+#endif
     extern int SD_MMC_Host_init(void);
     SD_MMC_Host_init();
 #endif
