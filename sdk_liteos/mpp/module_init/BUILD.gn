@@ -11,7 +11,7 @@ kernel_module(module_name) {
 
   lib_dirs = [
     "lib",
-    "//device/hisilicon/hispark_taurus/sdk_liteos/drivers/",
+    "//device/hisilicon/drivers/libs/ohos/llvm/hi3516dv300",
   ]
   libs = [
     "sys_config",
