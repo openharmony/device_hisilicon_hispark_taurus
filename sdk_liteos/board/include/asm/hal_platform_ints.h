@@ -117,6 +117,9 @@ extern "C" {
 
 #define HAL_WRITE_UINT32(addr, data) WRITE_UINT32(data, addr)
 
+#define NUM_HAL_INTERRUPT_PMU_0         80
+#define NUM_HAL_INTERRUPT_PMU_1         86
+
 #ifdef __cplusplus
 #if __cplusplus
 }
