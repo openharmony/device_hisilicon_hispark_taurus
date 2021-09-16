@@ -71,8 +71,10 @@ else
     else
     ifeq ($(OHOS_LITE), y)
         export KERNEL_ROOT?=$(OHOS_ROOT_PATH)/out/hispark_taurus/ipcamera_hispark_taurus_linux/kernel/$(KERNEL_VERSION)
+        export KBUILD_OUTPUT=$(OHOS_ROOT_PATH)/out/hispark_taurus/ipcamera_hispark_taurus_linux/kernel/OBJ/$(KERNEL_VERSION)
     else
         export KERNEL_ROOT?=$(OHOS_ROOT_PATH)/out/KERNEL_OBJ/kernel/src_tmp/$(KERNEL_VERSION)
+        export KBUILD_OUTPUT=$(OHOS_ROOT_PATH)/out/KERNEL_OBJ/kernel/OBJ/$(KERNEL_VERSION)
     endif
     endif
 endif
