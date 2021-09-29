@@ -62,8 +62,10 @@ Note:If the text contains special characters, please escape them according to th
 				<policyitem type="license" name="EndUserLicenseAgreement" path=".*" desc="HiSilicon copyright"/>
                 <policyitem type="license" name="GPLStyleLicense" path="sdk_linux/soc/src/LICENSE" desc="LICENSE for all files within sdk_linux/soc/src/ which reside in kernel space"/>
 				<policyitem type="license" name="GPL-2.0" path=".*" desc="Kernel space code"/>
+				<policyitem type="license" name="BSD-3-Clause" path=".*" desc="license for board.c"/>
 
                 <policyitem type="copyright" name="HiSilicon (Shanghai) Technologies CO., LIMITED." path=".*" desc="HiSilicon copyright"/>
+				<policyitem type="copyright" name="Huawei Technologies Co., Ltd. All rights reserved." path=".*" desc="original huawei copyright"/>
 			</policy>
         </policylist>
 		<filefilterlist>
