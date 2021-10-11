@@ -122,6 +122,10 @@ extern "C" {
 #define UART_REG_BASE             UART0_REG_BASE
 #define NUM_HAL_INTERRUPT_UART    NUM_HAL_INTERRUPT_UART0
 
+#ifdef LOSCFG_DEBUG_VERSION
+#define LOSCFG_BASE_CORE_TSK_LIMIT  256
+#endif
+
 #ifdef __cplusplus
 #if __cplusplus
 }
