@@ -276,7 +276,7 @@ else ifeq ($(HIARCH),$(filter $(HIARCH), hi3519av100))
 else ifeq ($(HIARCH),$(filter $(HIARCH), hi3516cv500 hi3516ev200))
 ifeq ($(CONFIG_CUSTOMER_VERSION), COMMON)
 	LIBS_CFLAGS    += -mcpu=cortex-a7 -mfloat-abi=softfp -mfpu=neon-vfpv4
-	LIBS_LD_CFLAGS += -mcpu=cortex-a7 -mfloat-abi=softfp -mfpu=neon-vfpv4
+	LIBS_LD_CFLAGS += -mcpu=cortex-a7 -mfloat-abi=softfp
 endif
 endif
 
@@ -346,6 +346,10 @@ endif
 
 ifeq ($(MPP_BUILD), n)
 	export ISP_ROOT = $(MPP_PATH)/cbb/isp
+endif
+
+ifeq ($(COMPILER_PATH_DIR), )
+	export COMPILER_PATH_DIR=$(OHOS_ROOT_PATH)/prebuilts/clang/ohos/linux-x86_64/llvm/bin
 endif
 
 # include the config file of platform
