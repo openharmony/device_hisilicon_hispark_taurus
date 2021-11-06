@@ -43,13 +43,10 @@ CLEAN_FILE += $(TARGET).mod.c \
                          .$(TARGET).o.cmd \
                          .$(TARGET).mod.o.cmd
 CLEAN_FILE += $(MOD_NAME).mod.c \
-                         $(MOD_NAME).ko.cmd \
-                         $(MOD_NAME).ko \
-                         $(MOD_NAME).o \
-                         $(MOD_NAME).mod.o \
-                         .$(MOD_NAME).ko.cmd \
-                         .$(MOD_NAME).o.cmd \
-                         .$(MOD_NAME).mod.o.cmd
+                         *.ko   \
+                         *.o \
+                         *.mod   \
+                         .*.cmd   \
 
 #*******************************************************************************
 .PHONY: default clean
