@@ -53,6 +53,10 @@ endif
 
 ##############################################################################
 # Allocated the kernel position
+ifeq ($(KERNEL_VERSION), )
+KERNEL_VERSION=linux-5.10
+endif
+
 ifeq ($(MPP_BUILD), y)
     ifeq ($(HIARCH),$(filter $(HIARCH), hi3559av100))
         export KERNEL_ROOT?=$(HIWORK_PATH)/osdrv$(HI_SUBARCH)$(CVER)/open_source/linux/$(KERNEL_NAME)
