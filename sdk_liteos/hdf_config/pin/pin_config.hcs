@@ -1,0 +1,885 @@
+root {
+    platform {
+        pin_config_hi35xx {
+            template pin_controller {
+                number = 0;
+                regStartBasePhy = 0;
+                regSize = 0;
+                pinCount = 0;
+                match_attr = "";
+                template pin_desc {
+                    pinName = "";
+                    regSize = 0;
+                    init = 0;
+                    F0 = "";
+                    F1 = "";
+                    F2 = "";
+                    F3 = "";
+                    F4 = "";
+                    F5 = "";
+                }
+            }
+            controller_0 :: pin_controller {
+                number = 0;
+                regStartBasePhy = 0x10FF0000;
+                regSize = 0x48;
+                pinCount = 18;
+                match_attr = "hisilicon_hi35xx_pin_0";
+                T1 :: pin_desc {
+                    pinName = "T1";
+                    init = 0x0600;
+                    F0 = "EMMC_CLK";
+                    F1 = "SFC_CLK";
+                    F2 = "SFC_BOOT_MODE";
+                }
+                R2 :: pin_desc {
+                    pinName = "R2";
+                    init = 0x0500;
+                    F0 = "EMMC_CMD";
+                    F1 = "SFC_HOLD_IO3";
+                }
+                U1 :: pin_desc {
+                    pinName = "U1";
+                    init = 0x0500;
+                    F0 = "EMMC_DATA0";
+                    F1 = "SFC_WP_IO2";
+                }
+                U2 :: pin_desc {
+                    pinName = "U2";
+                    init = 0x0500;
+                    F0 = "EMMC_DATA1";
+                    F1 = "SFC_MISO_IO1";
+                }
+                V1 :: pin_desc {
+                    pinName = "V1";
+                    init = 0x0500;
+                    F0 = "EMMC_DATA1";
+                    F1 = "SFC_MISO_IO1";
+                }
+                T2 :: pin_desc {
+                    pinName = "T2";
+                    init = 0x0500;
+                    F0 = "EMMC_DATA3";
+                    F1 = "SFC_MOSI_IO0";
+                }
+                T3 :: pin_desc {
+                    pinName = "T3";
+                    init = 0x0500;
+                    F0 = "EMMC_DATA3";
+                    F1 = "SFC_MOSI_IO0";
+                    F2 = "GPIO10_5";
+                }
+                AA2 :: pin_desc {
+                    pinName = "AA2";
+                    init = 0x0600;
+                    F0 = "GPIO1_0";
+                    F1 = "SDIO0_CARD_POWER_EN";
+                    F2 = "JTAG_TCK";
+                    F3 = "USBPHY_TEST_OBS0";
+                }
+                U4 :: pin_desc {
+                    pinName = "U4";
+                    init = 0x0500;
+                    F0 = "GPIO1_1";
+                    F1 = "SDIO0_CARD_DETECT";
+                    F3 = "USBPHY_TEST_OBS1";
+                }
+                W2 :: pin_desc {
+                    pinName = "W2";
+                    init = 0x0600;
+                    F0 = "GPIO1_2";
+                    F1 = "SDIO0_CCLK_OUT";
+                    F2 = "JTAG_TRSTN";
+                    F3 = "USBPHY_TEST_OBS2";
+                }
+                Y1 :: pin_desc {
+                    pinName = "Y1";
+                    init = 0x0500;
+                    F0 = "GPIO1_3";
+                    F1 = "SDIO0_CCMD";
+                    F2 = "USBPHY_TEST_OBS3";
+                }
+                W1 :: pin_desc {
+                    pinName = "W1";
+                    init = 0x0500;
+                    F0 = "GPIO1_4";
+                    F1 = "SDIO0_CDATA0";
+                    F2 = "USBPHY_TEST_OBS4";
+                }
+                V2 :: pin_desc {
+                    pinName = "V2";
+                    init = 0x0500;
+                    F0 = "GPIO1_5";
+                    F1 = "SDIO0_CDATA1";
+                    F2 = "JATG_TMS";
+                    F3 = "USBPHY_TEST_OBS5";
+                }
+                W3 :: pin_desc {
+                    pinName = "W3";
+                    init = 0x0500;
+                    F0 = "GPIO1_6";
+                    F1 = "SDIO0_CDATA2";
+                    F2 = "JATG_TDO";
+                    F3 = "USBPHY_TEST_OBS6";
+                }
+                Y2 :: pin_desc {
+                    pinName = "Y2";
+                    init = 0x0500;
+                    F0 = "GPIO1_7";
+                    F1 = "SDIO0_CDATA3";
+                    F2 = "JATG_TDI";
+                    F3 = "USBPHY_TEST_OBS7";
+                }
+                AA3 :: pin_desc {
+                    pinName = "AA3";
+                    init = 0x0600;
+                    F0 = "GPIO2_0";
+                    F1 = "USB_OVRCUR";
+                }
+                V4 :: pin_desc {
+                    pinName = "V4";
+                    init = 0x0600;
+                    F0 = "GPIO2_1";
+                    F1 = "USB_VBUS";
+                }
+                Y3 :: pin_desc {
+                    pinName = "Y3";
+                    init = 0x0600;
+                    F0 = "GPIO2_2";
+                    F1 = "USB_PWREN";
+                }
+            }
+            controller_1 :: pin_controller {
+                number = 1;
+                regStartBasePhy = 0x114F0000;
+                regSize = 0x44;
+                pinCount = 17;
+                match_attr = "hisilicon_hi35xx_pin_1";
+                W10 :: pin_desc {
+                    pinName = "W10";
+                    init = 0x0400;
+                    F0 = "GPIO2_4";
+                    F1 = "HDMI_HOTPLUG";
+                    F2 = "UART3_RXD";
+                }
+                V10 :: pin_desc {
+                    pinName = "V10";
+                    init = 0x0400;
+                    F0 = "GPIO2_5";
+                    F1 = "HDMI_CEC";
+                    F2 = "UART3_TXD";
+                }
+                Y10 :: pin_desc {
+                    pinName = "Y10";
+                    init = 0x0600;
+                    F0 = "GPIO2_6";
+                    F1 = "HDMI_SDA";
+                    F2 = "UART3_RTSN";
+                    F3 = "I2C4_SDA";
+                    F4 = "FLASH_TRIG";
+                }
+                AA10 :: pin_desc {
+                    pinName = "AA10";
+                    init = 0x0600;
+                    F0 = "GPIO2_7";
+                    F1 = "HDMI_SCL";
+                    F2 = "UART3_CTSN";
+                    F3 = "I2C4_SCL";
+                    F4 = "SHUTTER_TRIG";
+                }
+                Y11 :: pin_desc {
+                    pinName = "Y11";
+                    init = 0x0400;
+                    F0 = "MIPI_RX_CK1N";
+                    F1 = "VI_DATA8";
+                }
+                AA11 :: pin_desc {
+                    pinName = "AA11";
+                    init = 0x0400;
+                    F0 = "MIPI_RX_CK1P";
+                    F1 = "VI_DATA9";
+                }
+                Y14 :: pin_desc {
+                    pinName = "Y14";
+                    init = 0x0400;
+                    F0 = "MIPI_RX_D2N";
+                    F1 = "VI_DATA15";
+                }
+                AA14 :: pin_desc {
+                    pinName = "AA14";
+                    init = 0x0400;
+                    F0 = "MIPI_RX_D2P";
+                    F1 = "VI_DATA14";
+                }
+                Y12 :: pin_desc {
+                    pinName = "Y12";
+                    init = 0x0400;
+                    F0 = "MIPI_RX_D3N";
+                    F1 = "VI_DATA10";
+                }
+                AA12 :: pin_desc {
+                    pinName = "AA12";
+                    init = 0x0400;
+                    F0 = "MIPI_RX_D3P";
+                    F1 = "VI_DATA11";
+                }
+                Y13 :: pin_desc {
+                    pinName = "Y13";
+                    init = 0x0400;
+                    F0 = "MIPI_RX_CK0N";
+                    F1 = "VI_DATA13";
+                }
+                AA13 :: pin_desc {
+                    pinName = "AA13";
+                    init = 0x0400;
+                    F0 = "MIPI_RX_CK0P";
+                    F1 = "VI_DATA12";
+                }
+                V14 :: pin_desc {
+                    pinName = "V14";
+                    init = 0x0400;
+                    F0 = "MIPI_RX_D0N";
+                }
+                W14 :: pin_desc {
+                    pinName = "W14";
+                    init = 0x0400;
+                    F0 = "MIPI_RX_D0P";
+                }
+                V12 :: pin_desc {
+                    pinName = "V12";
+                    init = 0x0400;
+                    F0 = "MIPI_RX_D1N";
+                }
+                W12 :: pin_desc {
+                    pinName = "W12";
+                    init = 0x0400;
+                    F0 = "MIPI_RX_D1P";
+                }
+                Y19 :: pin_desc {
+                    pinName = "Y19";
+                    init = 0x0400;
+                    F0 = "GPIO3_0";
+                    F1 = "VI_DATA0";
+                    F2 = "VOU656_DATA0";
+                    F3 = "I2C5_SCL";
+                }
+            }
+            controller_2 :: pin_controller {
+                number = 2;
+                regStartBasePhy = 0x114F0044;
+                regSize = 0x40;
+                pinCount = 16;
+                match_attr = "hisilicon_hi35xx_pin_2";
+                AA19 :: pin_desc {
+                    pinName = "AA19";
+                    init = 0x0400;
+                    F0 = "GPIO3_1";
+                    F1 = "VI_DATA1";
+                    F2 = "VOU656_DATA1";
+                    F3 = "I2C5_SDA";
+                }
+                Y18 :: pin_desc {
+                    pinName = "Y18";
+                    init = 0x0400;
+                    F0 = "GPIO3_2";
+                    F1 = "VI_DATA2";
+                    F2 = "VOU656_DATA2";
+                    F3 = "I2C6_SCL";
+                }
+                AA18 :: pin_desc {
+                    pinName = "AA18";
+                    init = 0x0400;
+                    F0 = "GPIO3_3";
+                    F1 = "VI_DATA3";
+                    F2 = "VOU656_DATA3";
+                    F3 = "I2C6_SDA";
+                }
+                W18 :: pin_desc {
+                    pinName = "W18";
+                    init = 0x0400;
+                    F0 = "GPIO3_4";
+                    F1 = "VI_DATA4";
+                    F2 = "VOU656_DATA4";
+                    F3 = "UART2_RTSN";
+                    F4 = "SPI2_SCLK";
+                }
+                AA17 :: pin_desc {
+                    pinName = "AA17";
+                    init = 0x0400;
+                    F0 = "GPIO3_5";
+                    F1 = "VI_DATA5";
+                    F2 = "VOU656_DATA5";
+                    F3 = "UART2_CTSN";
+                    F4 = "SPI2_SDO";
+                }
+                Y17 :: pin_desc {
+                    pinName = "Y17";
+                    init = 0x0400;
+                    F0 = "GPIO3_6";
+                    F1 = "VI_DATA6";
+                    F2 = "VOU656_DATA6";
+                    F3 = "UART2_RXD";
+                    F4 = "SPI2_SDI";
+                }
+                AA16 :: pin_desc {
+                    pinName = "AA16";
+                    init = 0x0400;
+                    F0 = "GPIO3_7";
+                    F1 = "VI_DATA7";
+                    F2 = "VOU656_DATA7";
+                    F3 = "UART2_TXD";
+                    F4 = "SPI2_CSN";
+                }
+                AA20 :: pin_desc {
+                    pinName = "AA20";
+                    init = 0x0600;
+                    F0 = "GPIO4_6";
+                    F1 = "VI_VS";
+                    F2 = "SENSOR1_CLK";
+                    F3 = "FLASH_TRIG";
+                    F4 = "SENSOR_VS";
+                }
+                V18 :: pin_desc {
+                    pinName = "V18";
+                    init = 0x0600;
+                    F0 = "GPIO4_7";
+                    F1 = "VI_HS";
+                    F2 = "SENSOR1_RSTN";
+                    F3 = "FLASH_TRIG";
+                    F4 = "SENSOR_HS";
+                }
+                Y16 :: pin_desc {
+                    pinName = "Y16";
+                    init = 0x0400;
+                    F0 = "GPIO2_3";
+                    F1 = "VI_CLK";
+                    F2 = "VOU656_CLK";
+                }
+                V17 :: pin_desc {
+                    pinName = "V17";
+                    init = 0x0400;
+                    F0 = "GPIO4_0";
+                    F1 = "SENSOR0_CLK";
+                }
+                V16 :: pin_desc {
+                    pinName = "V16";
+                    init = 0x0600;
+                    F0 = "GPIO4_1";
+                    F1 = "SENSOR0_RSTN";
+                    F2 = "BOOT_SEL1";
+                }
+                W16 :: pin_desc {
+                    pinName = "W16";
+                    init = 0x0400;
+                    count = 4;
+                    F0 = "GPIO4_2";
+                    F1 = "SPI0_SCLK";
+                    F2 = "I2C0_SCL";
+                    F3 = "SPI_3LINE_SCLK";
+                }
+                Y15 :: pin_desc {
+                    pinName = "Y15";
+                    init = 0x0400;
+                    F0 = "GPIO4_3";
+                    F1 = "SPI0_SDO";
+                    F2 = "I2C0_SDA";
+                    F3 = "SPI_3LINE_SDATA";
+                }
+                W15 :: pin_desc {
+                    pinName = "W15";
+                    init = 0x0400;
+                    F0 = "GPIO4_4";
+                    F1 = "SPI0_SDI";
+                    F2 = "I2C1_SDA";
+                    F3 = "SENSOR_VS";
+                }
+                V15 :: pin_desc {
+                    pinName = "V15";
+                    init = 0x0500;
+                    F0 = "GPIO4_5";
+                    F1 = "SPI0_CSN";
+                    F2 = "I2C1_SCL";
+                    F3 = "SPI_3LINE_CSN";
+                    F4 = "SENSOR_HS";
+                }
+            }
+            controller_3 :: pin_controller {
+                number = 3;
+                regStartBasePhy = 0x111F0000;
+                regSize = 0x38;
+                pinCount = 14;
+                match_attr = "hisilicon_hi35xx_pin_3";
+                U18 :: pin_desc {
+                    pinName = "U18";
+                    init = 0x0500;
+                    F0 = "GPIO5_0";
+                    F1 = "UART1_RTSN";
+                    F2 = "UART4_RXD";
+                }
+                U19 :: pin_desc {
+                    pinName = "U19";
+                    init = 0x0400;
+                    F0 = "GPIO5_1";
+                    F1 = "UART1_CTSN";
+                    F2 = "UART4_TXD";
+                }
+                T21 :: pin_desc {
+                    pinName = "T21";
+                    init = 0x0500;
+                    F0 = "GPIO5_2";
+                    F1 = "UART1_RXD";
+                }
+                T19 :: pin_desc {
+                    pinName = "T19";
+                    init = 0x0400;
+                    F0 = "GPIO5_3";
+                    F1 = "UART1_TXD";
+                }
+                U21 :: pin_desc {
+                    pinName = "U21";
+                    init = 0x0500;
+                    F0 = "GPIO5_4";
+                    F1 = "UART0_RXD";
+                }
+                T20 :: pin_desc {
+                    pinName = "T20";
+                    init = 0x0400;
+                    F0 = "GPIO5_5";
+                    F1 = "UART0_TXD";
+                }
+                T18 :: pin_desc {
+                    pinName = "T18";
+                    init = 0x0500;
+                    F0 = "GPIO5_6";
+                    F1 = "I2C2_SDA";
+                }
+                R19 :: pin_desc {
+                    pinName = "R19";
+                    init = 0x0500;
+                    F0 = "GPIO5_7";
+                    F1 = "I2C2_SCL";
+                }
+                R18 :: pin_desc {
+                    pinName = "R18";
+                    init = 0x0600;
+                    F0 = "TEST_MODE";
+                }
+                R21 :: pin_desc {
+                    pinName = "R21";
+                    init = 0x0600;
+                    F0 = "GPIO6_6";
+                    F1 = "PWM0";
+                    F2 = "TEST_CLK";
+                }
+                R20 :: pin_desc {
+                    pinName = "R20";
+                    init = 0x0600;
+                    F0 = "GPIO6_7";
+                    F1 = "PWM1";
+                }
+                P21 :: pin_desc {
+                    pinName = "P21";
+                    init = 0x0600;
+                    F0 = "SVB_PWM";
+                    F2 = "GPIO10_2";
+                }
+                P19 :: pin_desc {
+                    pinName = "P19";
+                    init = 0x0400;
+                    F0 = "LSADC_CH0";
+                    F1 = "GPIO10_3";
+                }
+                P18 :: pin_desc {
+                    pinName = "P18";
+                    init = 0x0400;
+                    F0 = "LSADC_CH1";
+                    F1 = "GPIO10_4";
+                }
+            }
+            controller_4 :: pin_controller {
+                number = 4;
+                regStartBasePhy = 0x112F0000;
+                regSize = 0x40;
+                pinCount = 16;
+                match_attr = "hisilicon_hi35xx_pin_4";
+                H18 :: pin_desc {
+                    pinName = "H18";
+                    init = 0x0500;
+                    F0 = "GPIO10_6";
+                    F1 = "I2C7_SCL";
+                }
+                G19 :: pin_desc {
+                    pinName = "G19";
+                    init = 0x0500;
+                    F0 = "GPIO10_7";
+                    F1 = "I2C7_SDA";
+                    F2 = "RMII_CLK";
+                }
+                H20 :: pin_desc {
+                    pinName = "H20";
+                    init = 0x0600;
+                    F0 = "GPIO6_0";
+                    F1 = "SDIO1_CCLK_OUT";
+                    F2 = "RMII_RX_DV";
+                }
+                J21 :: pin_desc {
+                    pinName = "J21";
+                    init = 0x0500;
+                    F0 = "GPIO6_1";
+                    F1 = "SDIO1_CCMD";
+                    F2 = "EPHY_CLK";
+                }
+                G20 :: pin_desc {
+                    pinName = "G20";
+                    init = 0x0500;
+                    F0 = "GPIO6_2";
+                    F1 = "SDIO1_CDATA0";
+                    F2 = "MDCK";
+                }
+                H21 :: pin_desc {
+                    pinName = "H21";
+                    init = 0x0500;
+                    F0 = "GPIO6_3";
+                    F1 = "SDIO1_CDATA1";
+                    F2 = "MDIO";
+                }
+                G21 :: pin_desc {
+                    pinName = "G21";
+                    init = 0x0500;
+                    F0 = "GPIO6_4";
+                    F1 = "SDIO1_CDATA2";
+                    F2 = "RMII_TX_EN";
+                }
+                J20 :: pin_desc {
+                    pinName = "J20";
+                    init = 0x0500;
+                    F0 = "GPIO6_5";
+                    F1 = "SDIO1_CDATA3";
+                    F2 = "EPHY_RSTN";
+                }
+                F19 :: pin_desc {
+                    pinName = "F19";
+                    init = 0x0600;
+                    F0 = "JTAG_TRSTN";
+                    F1 = "SPI1_SCLK";
+                    F2 = "RMII_TXD1";
+                    F3 = "I2S_MCLK";
+                    F4 = "GPIO8_0";
+                }
+                E19 :: pin_desc {
+                    pinName = "E19";
+                    init = 0x0600;
+                    F0 = "JTAG_TCK";
+                    F1 = "SPI1_SDO";
+                    F2 = "RMII_RXD1";
+                    F3 = "I2S_BCLK_TX";
+                    F4 = "GPIO8_1";
+                }
+                G18 :: pin_desc {
+                    pinName = "G18";
+                    init = 0x0500;
+                    F0 = "JTAG_TMS";
+                    F1 = "SPI1_CSN0";
+                    F2 = "RMII_TXD0";
+                    F3 = "I2S_WS_TX";
+                    F4 = "GPIO8_2";
+                }
+                F18 :: pin_desc {
+                    pinName = "F18";
+                    init = 0x0400;
+                    F0 = "JTAG_TDO";
+                    F1 = "SPI1_SDI";
+                    F2 = "RMII_RXD0";
+                    F3 = "I2S_SD_TX";
+                    F4 = "GPIO8_3";
+                }
+                E18 :: pin_desc {
+                    pinName = "E18";
+                    init = 0x0500;
+                    F0 = "JTAG_TDI";
+                    F1 = "SPI1_CSN1";
+                    F2 = "LCD_DATA23";
+                    F3 = "I2S_SD_RX";
+                    F4 = "GPIO8_4";
+                }
+                F21 :: pin_desc {
+                    pinName = "F21";
+                    init = 0x0400;
+                    F0 = "GPIO0_6";
+                    F1 = "LCD_CLK";
+                    F2 = "VOU1120_CLK/VOU656_CLK";
+                }
+                E21 :: pin_desc {
+                    pinName = "E21";
+                    init = 0x0400;
+                    F0 = "GPIO8_5";
+                    F1 = "MDIO";
+                    F2 = "LCD_DATA5";
+                    F3 = "VOU1120_DATA2/VOU656_DATA2";
+                }
+                E20 :: pin_desc {
+                    pinName = "E20";
+                    init = 0x0600;
+                    F0 = "GPIO8_6";
+                    F1 = "MDCK";
+                    F2 = "LCD_DATA4";
+                    F3 = "VOU1120_DATA3/VOU656_DATA3";
+                    F4 = "BOOT_SEL0";
+                }
+            }
+            controller_5 :: pin_controller {
+                number = 5;
+                regStartBasePhy = 0x112F0040;
+                regSize = 0x40;
+                pinCount = 16;
+                match_attr = "hisilicon_hi35xx_pin_5";
+                C21 :: pin_desc {
+                    pinName = "C21";
+                    init = 0x0600;
+                    F0 = "TEST_CLK";
+                    F1 = "RMII_TXD1";
+                    F2 = "LCD_DATA1";
+                    F3 = "VOU1120_DATA6/VOU656_DATA6";
+                    F4 = "GPIO8_7";
+                }
+                D20 :: pin_desc {
+                    pinName = "D20";
+                    init = 0x0600;
+                    F0 = "GPIO7_0";
+                    F1 = "RMII_TX_EN";
+                    F2 = "LCD_DATA2";
+                    F3 = "VOU1120_DATA5/VOU656_DATA5";
+                }
+                D19 :: pin_desc {
+                    pinName = "D19";
+                    init = 0x0400;
+                    F0 = "GPIO7_1";
+                    F1 = "RMII_TXD0";
+                    F2 = "LCD_DATA0";
+                    F3 = "VOU1120_DATA7/VOU656_DATA7";
+                }
+                B21 :: pin_desc {
+                    pinName = "B21";
+                    init = 0x0400;
+                    F0 = "GPIO7_2";
+                    F1 = "RMII_CLK";
+                    F2 = "LCD_HSYNC";
+                }
+                A20 :: pin_desc {
+                    pinName = "A20";
+                    init = 0x0600;
+                    F0 = "GPIO7_3";
+                    F1 = "RMII_RX_DV";
+                    F2 = "LCD_DATA6";
+                    F3 = "VOU1120_DATA1/VOU656_DATA1";
+                }
+                C20 :: pin_desc {
+                    pinName = "C20";
+                    init = 0x0400;
+                    F0 = "GPIO7_4";
+                    F1 = "RMII_RXD1";
+                    F2 = "LCD_VSYNC";
+                }
+                B20 :: pin_desc {
+                    pinName = "B20";
+                    init = 0x0400;
+                    F0 = "GPIO7_5";
+                    F1 = "RMII_RXD0";
+                    F2 = "LCD_DE";
+                }
+                D21 :: pin_desc {
+                    pinName = "D21";
+                    init = 0x0600;
+                    F0 = "GPIO7_6";
+                    F1 = "EPHY_RSTN";
+                    F2 = "LCD_DATA3";
+                    F3 = "VOU1120_DATA4/VOU656_DATA4";
+                    F4 = "SFC_DEVICE_MODE";
+                }
+                F20 :: pin_desc {
+                    pinName = "F20";
+                    init = 0x0400;
+                    F0 = "GPIO7_7";
+                    F1 = "EPHY_CLK";
+                    F2 = "LCD_DATA7";
+                    F3 = "VOU1120_DATA0/VOU656_DATA0";
+                }
+                A19 :: pin_desc {
+                    pinName = "A19";
+                    init = 0x0600;
+                    F0 = "DSI_D3P";
+                    F1 = "GPIO9_0";
+                    F2 = "LCD_DATA16";
+                    F3 = "SHUTTER_TRIG";
+                    F4 = "LCD_DATA5";
+                }
+                B19 :: pin_desc {
+                    pinName = "B19";
+                    init = 0x0600;
+                    F0 = "DSI_D3N";
+                    F1 = "GPIO9_1";
+                    F2 = "LCD_DATA17";
+                    F3 = "FLASH_TRIG";
+                    F4 = "LCD_CLK";
+                }
+                B18 :: pin_desc {
+                    pinName = "B18";
+                    init = 0x0400;
+                    F0 = "DSI_D2N";
+                    F1 = "GPIO9_2";
+                    F2 = "LCD_DATA14";
+                    F3 = "VOU1120_DATA9";
+                    F4 = "LCD_DATA3";
+                }
+                C18 :: pin_desc {
+                    pinName = "C18";
+                    init = 0x0400;
+                    F0 = "DSI_D2P";
+                    F1 = "GPIO9_3";
+                    F2 = "LCD_DATA15";
+                    F3 = "VOU1120_DATA8";
+                    F4 = "LCD_DATA4";
+                }
+                A17 :: pin_desc {
+                    pinName = "A17";
+                    init = 0x0400;
+                    F0 = "DSI_CKP";
+                    F1 = "GPIO9_4";
+                    F2 = "LCD_DATA12";
+                    F3 = "VOU1120_DATA11";
+                    F4 = "LCD_DATA1";
+                }
+                B17 :: pin_desc {
+                    pinName = "B17";
+                    init = 0x0400;
+                    F0 = "DSI_CKN";
+                    F1 = "GPIO9_5";
+                    F2 = "LCD_DATA13";
+                    F3 = "VOU1120_DATA10";
+                    F4 = "LCD_DATA2";
+                }
+                B16 :: pin_desc {
+                    pinName = "B16";
+                    init = 0x0400;
+                    F0 = "DSI_D1N";
+                    F1 = "GPIO9_6";
+                    F2 = "LCD_DATA10";
+                    F3 = "VOU1120_DATA13";
+                    F4 = "LCD_HSYNC";
+                }
+            }
+            controller_6 :: pin_controller {
+                number = 6;
+                regStartBasePhy = 0x112F0080;
+                regSize = 0x40;
+                pinCount = 16;
+                match_attr = "hisilicon_hi35xx_pin_6";
+                C16 :: pin_desc {
+                    pinName = "C16";
+                    init = 0x0400;
+                    F0 = "DSI_D1P";
+                    F1 = "GPIO9_7";
+                    F2 = "LCD_DATA11";
+                    F3 = "VOU1120_DATA12";
+                    F4 = "LCD_DATA0";
+                }
+                A15 :: pin_desc {
+                    pinName = "A15";
+                    init = 0x0600;
+                    F0 = "DSI_D0P";
+                    F1 = "GPIO10_0";
+                    F2 = "LCD_DATA8";
+                    F3 = "VOU1120_DATA15";
+                    F4 = "LCD_DE";
+                }
+                B15 :: pin_desc {
+                    pinName = "B15";
+                    init = 0x0600;
+                    F0 = "DSI_D0N";
+                    F1 = "GPIO10_1";
+                    F2 = "LCD_DATA9";
+                    F3 = "VOU1120_DATA14";
+                    F4 = "LCD_VSYNC";
+                }
+                A14 :: pin_desc {
+                    pinName = "A14";
+                    init = 0x0500;
+                    F0 = "GPIO0_1";
+                    F1 = "I2C3_SDA";
+                    F2 = "LCD_DATA20";
+                }
+                B14 :: pin_desc {
+                    pinName = "B14";
+                    init = 0x0500;
+                    F0 = "GPIO0_2";
+                    F1 = "I2C3_SCL";
+                    F2 = "LCD_DATA19";
+                }
+                C13_0x112F_0094 :: pin_desc {
+                    pinName = "C13";
+                    init = 0x0500;
+                    F0 = "GPIO0_3";
+                    F1 = "IR_IN";
+                    F2 = "LCD_DATA18";
+                }
+                B13 :: pin_desc {
+                    pinName = "B13";
+                    init = 0x0600;
+                    F0 = "GPIO0_4";
+                    F1 = "LCD_DATA21";
+                }
+                A13 :: pin_desc {
+                    pinName = "A13";
+                    init = 0x0600;
+                    F0 = "GPIO0_5";
+                    F1 = "LCD_DATA22";
+                }
+                C14 :: pin_desc {
+                    pinName = "C14";
+                    init = 0x0500;
+                    F0 = "GPIO0_0";
+                    F1 = "UPDATE_MODE";
+                }
+                M18 :: pin_desc {
+                    pinName = "M18";
+                    init = 0x0500;
+                    F0 = "PWR_RSTN";
+                }
+                K18 :: pin_desc {
+                    pinName = "K18";
+                    init = 0x0500;
+                    F0 = "PWR_WAKEUP";
+                    F1 = "GPIO11_0";
+                }
+                H19 :: pin_desc {
+                    pinName = "H19";
+                    init = 0x0600;
+                    F0 = "PWR_SEQ0";
+                    F1 = "GPIO11_1";
+                }
+                J18 :: pin_desc {
+                    pinName = "J18";
+                    init = 0x0600;
+                    F0 = "PWR_SEQ1";
+                    F1 = "GPIO11_2";
+                }
+                K21 :: pin_desc {
+                    pinName = "K21";
+                    init = 0x0600;
+                    F0 = "PWR_STARTUP";
+                }
+                K19 :: pin_desc {
+                    pinName = "K19";
+                    init = 0x0600;
+                    F0 = "PWR_EN";
+                    F1 = "GPIO11_3";
+                }
+                L19 :: pin_desc {
+                    pinName = "L19";
+                    init = 0x0500;
+                    F0 = "PWR_BUTTON";
+                }
+            }
+        }
+    }
+}
