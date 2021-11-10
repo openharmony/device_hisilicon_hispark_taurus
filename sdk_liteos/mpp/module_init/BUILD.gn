@@ -57,5 +57,6 @@ kernel_module(module_name) {
     "hi3516cv500_vfmw",
     "hi3516cv500_cipher",
     "usb_dwc3",
+    "hi3516cv500_wdt",
   ]
 }
