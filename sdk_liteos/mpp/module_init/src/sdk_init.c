@@ -359,6 +359,15 @@ static void insert_audio(void)
     }
 }
 
+static int Watchdog_init(void)
+{
+    extern int wtdg_mod_init(void *pArgs);
+    extern void get_wtdg_module_param(void *pArgs);
+    WTDG_MODULE_PARAM_S wtdg_mod_param;
+    wtdg_mod_param.default_margin = 15; // 15 is the watchdog timeout
+    return wtdg_mod_init(&wtdg_mod_param);
+}
+
 extern void osal_proc_init(void);
 
 void SDK_init(void)
@@ -557,6 +566,11 @@ void SDK_init(void)
     ret = HI_USER_init();
     if (ret != 0) {
         printf("hi user init error.\n");
+    }
+
+    ret = Watchdog_init();
+    if (ret != 0) {
+        printf("watchdog init error.\n");
     }
 
     printf("SDK init ok...\n");

@@ -121,6 +121,11 @@ typedef struct hiPM_MODULE_PARAMS_S {
     // HI_U32 u32RegulatorType; /* 0:DC-DC, 1:PMU */
 } PM_MODULE_PARAMS_S;
 
+typedef struct tagWTDG_MODULE_PARAM_S {
+    int default_margin;
+    int nodeamon;
+} WTDG_MODULE_PARAM_S;
+
 #define MMZ_SETUP_CMDLINE_LENGTH      256
 typedef struct hiMMZ_SETUP_MODULE_PARAMS_S {
     char mmz[MMZ_SETUP_CMDLINE_LENGTH];
