@@ -364,7 +364,7 @@ static int Watchdog_init(void)
     extern int wtdg_mod_init(void *pArgs);
     extern void get_wtdg_module_param(void *pArgs);
     WTDG_MODULE_PARAM_S wtdg_mod_param;
-    wtdg_mod_param.default_margin = 15;
+    wtdg_mod_param.default_margin = 15; // 15 is the watchdog timeout
     return wtdg_mod_init(&wtdg_mod_param);
 }
 
