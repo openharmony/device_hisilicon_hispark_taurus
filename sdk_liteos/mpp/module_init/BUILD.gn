@@ -8,11 +8,7 @@ kernel_module(module_name) {
     "src/sdk_init.c",
     "src/system_init.c",
   ]
-
-  lib_dirs = [
-    "lib",
-    "//device/hisilicon/drivers/libs/ohos/llvm/hi3516dv300",
-  ]
+  lib_dirs = [ "lib" ]
   libs = [
     "sys_config",
     "hi_osal",
@@ -56,7 +52,6 @@ kernel_module(module_name) {
     "hi3516cv500_nnie",
     "hi3516cv500_vfmw",
     "hi3516cv500_cipher",
-    "usb_dwc3",
     "hi3516cv500_wdt",
   ]
 }
