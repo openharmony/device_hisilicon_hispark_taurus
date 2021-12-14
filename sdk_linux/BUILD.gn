@@ -15,6 +15,7 @@ group("hispark_taurus_sdk") {
   if (defined(ohos_lite)) {
     deps = [
       ":sdk_linux_lite_libs",
+      ":sdk_make",
       "//kernel/linux/build:linux_kernel",
     ]
   } else {
@@ -74,7 +75,7 @@ if (defined(ohos_lite)) {
       rebase_path("$sdk_tmp_root_path"),
       "n",
       rebase_path("$clang_base_path"),
-      linux_kernel_version
+      linux_kernel_version,
     ]
     deps = [ "//kernel/linux/build:linux_kernel" ]
   }
