@@ -56,7 +56,7 @@ Note:If the text contains special characters, please escape them according to th
 -->
 <configuration>
     <oatconfig>
-		<licensefile>sdk_linux/soc/src/LICENSE|sdk_linux/soc/lib/LICENSE|sdk_linux/uboot/reg/LICENSE|prebuilts/LICENSE</licensefile>
+		<licensefile>sdk_linux/soc/lib/LICENSE|sdk_liteos/board/LICENSE|prebuilts/LICENSE</licensefile>
         <policylist>
             <policy name="projectPolicy" desc="">
 				<policyitem type="license" name="EndUserLicenseAgreement" path=".*" desc="HiSilicon copyright"/>
