@@ -1,0 +1,57 @@
+{
+    "name": "@ohos/device_hisilicon_hispark_taurus",
+    "version": "",
+    "description": "Hi3516DV300 chip driver software, including media drivers, media user-space libraries, and notice files | Hi3516DV300芯片驱动软件，包括：媒体驱动子目录、媒体用户态库子目录、NOTICE文件",
+    "homePage": "https://gitee.com/openharmony",
+    "license": "UNLICENSED",
+    "repository": "https://gitee.com/openharmony/device_hisilicon_hispark_taurus",
+    "domain": "os",
+    "language": "",
+    "publishAs": "code-segment",
+    "private": false,
+    "scripts": {},
+    "tags": [
+        "device"
+    ],
+    "keywords": [
+        "device",
+        "hisilicon",
+        "hispark",
+        "taurus"
+    ],
+    "envs": [],
+    "dirs": [],
+    "author": {
+        "name": "",
+        "email": "",
+        "url": ""
+    },
+    "contributors": [
+        {
+            "name": "",
+            "email": "",
+            "url": ""
+        }
+    ],
+    "segment": {
+        "destPath": "device/hisilicon/hispark_taurus"
+    },
+    "component": {
+        "name": "device_hisilicon_hispark_taurus",
+        "subsystem": "",
+        "syscap": [],
+        "features": [],
+        "adapted_system_type": [],
+        "rom": "",
+        "ram": "",
+        "deps": {
+            "components": [],
+            "third_party": []
+        },
+        "build": {
+            "sub_component": [],
+            "inner_kits": [],
+            "test": []
+        }
+    }
+}
