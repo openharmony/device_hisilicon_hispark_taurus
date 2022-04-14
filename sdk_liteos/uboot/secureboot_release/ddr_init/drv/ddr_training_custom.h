@@ -22,7 +22,11 @@
 /* Disable write dm
 #define DDR_WRITE_DM_DISABLE */
 
+#ifdef  DDR_REG_BASE_PHY1
+#define DDR_PHY_NUM              2 /* phy number */
+#else
 #define DDR_PHY_NUM              1 /* phy number */
+#endif
 
 #define DDR_DMC_PER_PHY_MAX      2 /* dmc number per phy max */
 
