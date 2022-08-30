@@ -888,6 +888,7 @@ int mmz_userdev_mmap(struct file *file, struct vm_area_struct *vma)
     struct mmb_info *p = NULL;
     struct mmz_userdev_info *pmu = file->private_data;
     unsigned long offset = vma->vm_pgoff << PAGE_SHIFT;
+    unsigned long size = vma->vm_end - vma->vm_start;
     hil_mmb_t *mmb = NULL;
     int mmb_cached = 0;
 
@@ -897,13 +898,15 @@ int mmz_userdev_mmap(struct file *file, struct vm_area_struct *vma)
         mmb = hil_mmb_getby_phys_2(offset, &mmb_offset);
         if (mmb == NULL) {
             /* Allow mmap MMZ allocated by other core. */
-            if (hil_map_mmz_check_phys(offset, vma->vm_end - vma->vm_start)) {
+            if (hil_map_mmz_check_phys(offset, size)) {
                 return -EPERM;
             }
         } else {
             mmb_cached = mmb->flags & HIL_MMB_MAP2KERN_CACHED;
         }
     } else {
+        mmb = p->mmb;
+
         if (p->mapped != NULL) {
             if (p->map_cached) {
                 error_mmz("mmb(0x%08lX) have been mapped already and cache_type is %u?!\n", offset, p->map_cached);
@@ -911,6 +914,11 @@ int mmz_userdev_mmap(struct file *file, struct vm_area_struct *vma)
             }
         }
         mmb_cached = p->map_cached;
+    }
+
+    if (mmb != NULL && mmb->length - (offset - mmb->phys_addr) < size) {
+        error_mmz("mmap failed for oversize %08lX\n", size);
+        return -EINVAL;
     }
 
     if (file->f_flags & O_SYNC) {
@@ -941,7 +949,6 @@ int mmz_userdev_mmap(struct file *file, struct vm_area_struct *vma)
     if (pfn_valid(vma->vm_pgoff)) {
         unsigned long start = vma->vm_start;
         unsigned long pfn = vma->vm_pgoff;
-        size_t size = vma->vm_end - vma->vm_start;
 
         while (size) {
             if (pfn_valid(pfn)) {
@@ -962,7 +969,6 @@ int mmz_userdev_mmap(struct file *file, struct vm_area_struct *vma)
             pfn++;
         }
     } else {
-        size_t size = vma->vm_end - vma->vm_start;
         if (size == 0) {
             return -EPERM;
         }
@@ -990,7 +996,7 @@ static int mmz_userdev_release(struct inode *inode, struct file *file)
 
     osal_unused(inode);
     list_for_each_entry_safe(p, n, &pmu->list, list) {
-        error_mmz("MMB LEAK(pid=%d): 0x%lX, %lu bytes, '%s'\n",
+        error_mmz("MMB LEAK(pid=%d): 0x%pK, %lu bytes, '%s'\n",
               pmu->pid, hil_mmb_phys(p->mmb),
               hil_mmb_length(p->mmb),
               hil_mmb_name(p->mmb));
@@ -1001,10 +1007,10 @@ static int mmz_userdev_release(struct inode *inode, struct file *file)
          */
         if (p->mapped != NULL) {
 #if defined(KERNEL_BIT_64) && defined(USER_BIT_32)
-            warning("mmb<0x%llx> mapped to userspace 0x%pK will be unmapped!\n",
+            warning("mmb<0x%pK> mapped to userspace 0x%pK will be unmapped!\n",
                     p->phys_addr, p->mapped);
 #else
-            warning("mmb<0x%lx> mapped to userspace 0x%pK will be unmapped!\n",
+            warning("mmb<0x%pK> mapped to userspace 0x%pK will be unmapped!\n",
                     p->phys_addr, p->mapped);
 #endif
         }

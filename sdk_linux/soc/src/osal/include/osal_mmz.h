@@ -47,7 +47,7 @@ struct hil_media_memory_zone {
 };
 typedef struct hil_media_memory_zone hil_mmz_t;
 
-#define HIL_MMZ_FMT_S              "PHYS(0x%08lX, 0x%08lX), GFP=%lu, nBYTES=%luKB,    NAME=\"%s\""
+#define HIL_MMZ_FMT_S              "PHYS(0x%08pK, 0x%08pK), GFP=%lu, nBYTES=%luKB,    NAME=\"%s\""
 #define hil_mmz_fmt_arg(p) (p)->phys_start, (p)->phys_start + (p)->nbytes - 1, (p)->gfp, (p)->nbytes / SZ_1K, (p)->name
 
 struct hil_media_memory_block {
@@ -81,7 +81,7 @@ typedef struct hil_media_memory_block hil_mmb_t;
 #define HIL_MMB_MAP2KERN_CACHED    (1 << 1)
 #define HIL_MMB_RELEASED           (1 << 2)
 
-#define HIL_MMB_FMT_S              "phys(0x%08lX, 0x%08lX), kvirt=0x%08lX, flags=0x%08lX, length=%luKB,    name=\"%s\""
+#define HIL_MMB_FMT_S              "phys(0x%08pK, 0x%08pK), kvirt=0x%08pK, flags=0x%08pK, length=%luKB,    name=\"%s\""
 #define hil_mmb_fmt_arg(p) \
     (p)->phys_addr, mmz_grain_align((p)->phys_addr + (p)->length) - 1, \
     (unsigned long)(uintptr_t)((p)->kvirt), (p)->flags, (p)->length / SZ_1K, (p)->name
